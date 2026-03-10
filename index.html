@@ -1,757 +1,1250 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+<meta name="google-adsense-account" content="ca-pub-8120972887586800">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>아이 작명 AI - 사주팔자 이름 추천</title>
-
-  <!-- SEO -->
-  <meta name="description" content="AI가 사주팔자 음양오행을 분석해 신생아 이름을 추천해 립니다." />
-
-  <!-- Pretendard 웹폰트 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8120972887586800"
+     crossorigin="anonymous"></script>
+  <meta name="description" content="AI가 사주팔자 음양오행을 분석해 신생아 이름을 추천해 드립니다." />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
-
- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8120972887586800"
-     crossorigin="anonymous"></script>
-
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8120972887586800" crossorigin="anonymous"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: 'Pretendard', sans-serif;
       background: linear-gradient(160deg, #e8f4fd 0%, #fce4ec 100%);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+      display: flex; flex-direction: column; align-items: center;
       padding: 16px 16px 32px;
     }
-
-    /* ── 상단 배너 광고 슬롯 ────────────────────────── */
-    .ad-banner-top {
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 10px;
-    }
-    .ad-placeholder {
-      background: #f0f0f0;
-      border: 1px dashed #ccc;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #aaa;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-    }
+    .ad-banner-top { width: 100%; max-width: 400px; margin-bottom: 10px; }
+    .ad-placeholder { background: #f0f0f0; border: 1px dashed #ccc; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: #aaa; font-size: 0.72rem; font-weight: 600; }
     .ad-placeholder.banner { height: 60px; }
-    .ad-placeholder.large  { height: 250px; }
+    .ad-placeholder.large  { height: 200px; }
 
-    /* ── App Container ─────────────────────────── */
-    .app {
-      background: #fff;
-      border-radius: 28px;
-      box-shadow: 0 12px 48px rgba(100, 120, 180, 0.15);
-      width: 100%;
-      max-width: 400px;
-      overflow: hidden;
-    }
+    .app { background: #fff; border-radius: 28px;
+      box-shadow: 0 12px 48px rgba(100,120,180,0.15);
+      width: 100%; max-width: 400px; overflow: hidden; }
 
-    /* ── Header ────────────────────────────────── */
-    .app-header {
-      background: linear-gradient(135deg, #a8d8ea 0%, #f7b7c5 100%);
-      padding: 24px 24px 20px;
-      text-align: center;
-    }
-    .app-header .logo { font-size: 1.9rem; margin-bottom: 4px; }
-    .app-header h1 { font-size: 1.25rem; font-weight: 700; color: #3d3d5c; }
-    .app-header p  { font-size: 0.76rem; color: #5a5a7a; margin-top: 3px; }
+    .app-header { background: linear-gradient(135deg, #a8d8ea 0%, #f7b7c5 100%);
+      padding: 22px 24px 18px; text-align: center; }
+    .app-header .logo { font-size: 1.8rem; margin-bottom: 3px; }
+    .app-header h1 { font-size: 1.2rem; font-weight: 700; color: #3d3d5c; }
+    .app-header p  { font-size: 0.74rem; color: #5a5a7a; margin-top: 2px; }
 
-    /* ── Screen base ───────────────────────────── */
-    .screen { display: none; padding: 24px 20px 28px; }
+    .screen { display: none; padding: 22px 18px 26px; }
     .screen.active { display: block; }
 
-    /* ── Input Screen ──────────────────────────── */
-    .field { margin-bottom: 16px; }
-    .field label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #5a5a7a;
-      margin-bottom: 6px;
-    }
-    .field input,
-    .field select {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid #dce8f5;
-      border-radius: 12px;
-      font-family: 'Pretendard', sans-serif;
-      font-size: 1rem;
-      color: #333;
-      background: #f8fbff;
-      outline: none;
-      transition: border-color 0.2s;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    .field input:focus,
-    .field select:focus { border-color: #7ec8e3; background: #fff; }
+    /* ── 입력 ── */
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 0.78rem; font-weight: 600; color: #5a5a7a; margin-bottom: 5px; }
+    .field input, .field select {
+      width: 100%; padding: 11px 13px;
+      border: 1.5px solid #dce8f5; border-radius: 12px;
+      font-family: 'Pretendard', sans-serif; font-size: 0.95rem; color: #333;
+      background: #f8fbff; outline: none; transition: border-color 0.2s;
+      appearance: none; -webkit-appearance: none; }
+    .field input:focus, .field select:focus { border-color: #7ec8e3; background: #fff; }
     .select-wrap { position: relative; }
-    .select-wrap::after {
-      content: '▾';
-      position: absolute; right: 14px; top: 50%;
-      transform: translateY(-50%);
-      color: #7ec8e3; pointer-events: none;
-    }
-
+    .select-wrap::after { content: '▾'; position: absolute; right: 13px; top: 50%;
+      transform: translateY(-50%); color: #7ec8e3; pointer-events: none; }
     .btn-primary {
-      width: 100%;
-      padding: 15px;
+      width: 100%; padding: 14px; margin-top: 8px;
       background: linear-gradient(135deg, #7ec8e3 0%, #f7a8c0 100%);
       border: none; border-radius: 14px;
-      font-family: 'Pretendard', sans-serif;
-      font-size: 1.05rem; font-weight: 700; color: #fff;
-      cursor: pointer; margin-top: 8px;
-      box-shadow: 0 4px 18px rgba(126, 200, 227, 0.35);
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-    .btn-primary:hover  { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(126, 200, 227, 0.45); }
+      font-family: 'Pretendard', sans-serif; font-size: 1rem; font-weight: 700; color: #fff;
+      cursor: pointer; box-shadow: 0 4px 18px rgba(126,200,227,0.35);
+      transition: transform 0.15s, box-shadow 0.15s; }
+    .btn-primary:hover { transform: translateY(-2px); }
     .btn-primary:active { transform: translateY(0); }
+    .ad-banner-inline { margin-top: 16px; border-radius: 10px; overflow: hidden; }
 
-    /* ── 하단 배너 광고 (입력 화면 내부) ──────────── */
-    .ad-banner-inline {
-      margin-top: 18px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    /* ── Ad Gate Screen ────────────────────────── */
-    #screen-adgate { text-align: center; padding-top: 28px; padding-bottom: 32px; }
-
-    .adgate-title {
-      font-size: 1rem; font-weight: 700; color: #3d3d5c; margin-bottom: 6px;
-    }
-    .adgate-sub {
-      font-size: 0.8rem; color: #8888aa; margin-bottom: 20px; line-height: 1.6;
-    }
-
-    /* 모의 광고 크리에이티브 영역 */
+    /* ── 광고 게이트 ── */
+    #screen-adgate { text-align: center; padding-top: 26px; padding-bottom: 28px; }
+    .adgate-title { font-size: 0.98rem; font-weight: 700; color: #3d3d5c; margin-bottom: 5px; }
+    .adgate-sub { font-size: 0.78rem; color: #8888aa; margin-bottom: 18px; line-height: 1.6; }
     .mock-ad-box {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      border-radius: 16px;
-      padding: 24px 20px;
-      margin-bottom: 18px;
-      position: relative;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+      background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 16px;
+      padding: 22px 18px; margin-bottom: 16px; position: relative;
+      min-height: 190px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; overflow: hidden; }
+    .mock-ad-brand { font-size: 0.62rem; color: rgba(255,255,255,0.4);
+      position: absolute; top: 10px; left: 13px; letter-spacing: 0.08em; }
+    .mock-ad-skip-label { font-size: 0.62rem; color: rgba(255,255,255,0.4);
+      position: absolute; top: 10px; right: 13px; }
+    .mock-ad-content { display: flex; flex-direction: column; align-items: center; gap: 9px; }
+    .mock-ad-icon { font-size: 2.5rem; }
+    .mock-ad-headline { font-size: 0.9rem; font-weight: 700; color: #fff; text-align: center; }
+    .mock-ad-cta { background: #f7a8c0; border-radius: 20px; padding: 5px 16px;
+      font-size: 0.76rem; font-weight: 700; color: #fff; margin-top: 3px; }
+    .mock-ad-progress { position: absolute; bottom: 0; left: 0; height: 3px;
+      background: #7ec8e3; width: 0%; transition: width 0.1s linear; border-radius: 0 0 0 16px; }
+    .ad-countdown-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .countdown-track { flex: 1; height: 6px; background: #e8edf5; border-radius: 10px; overflow: hidden; }
+    .countdown-fill { height: 100%; background: linear-gradient(90deg, #7ec8e3, #f7a8c0);
+      border-radius: 10px; width: 100%; transition: width 0.1s linear; }
+    .countdown-text { font-size: 0.78rem; font-weight: 700; color: #7ec8e3; min-width: 24px; text-align: right; }
+    .btn-watch-done { width: 100%; padding: 13px; background: #e0e0e0; border: none; border-radius: 14px;
+      font-family: 'Pretendard', sans-serif; font-size: 0.95rem; font-weight: 700; color: #aaa; cursor: not-allowed;
+      transition: background 0.3s, color 0.3s; }
+    .btn-watch-done.ready { background: linear-gradient(135deg, #7ec8e3, #f7a8c0); color: #fff;
+      cursor: pointer; box-shadow: 0 4px 18px rgba(126,200,227,0.35); animation: pulse 1s ease infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    .adgate-notice { font-size: 0.7rem; color: #bbb; line-height: 1.6; margin-top: 10px; }
 
-    /* ═══════════════════════════════════════════════════════
-       [광고] 실제 앱 출시 시 이 .mock-ad-box 영역을 아래로 교체:
-
-       웹(AdSense 디스플레이 광고):
-         <ins class="adsbygoogle"
-              style="display:block;min-height:200px"
-              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-              data-ad-slot="XXXXXXXXXX"
-              data-ad-format="rectangle"></ins>
-         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-       Android 앱(AdMob 리워드 광고 — Java/Kotlin):
-         RewardedAd.load(this, "ca-app-pub-XXXXXXXX/XXXXXXXX", adRequest,
-           new RewardedAdLoadCallback() {
-             public void onAdLoaded(RewardedAd ad) {
-               ad.show(activity, rewardItem -> unlockResult());
-             }
-           });
-
-       Capacitor 웹뷰 래핑 시:
-         @capacitor-community/admob 플러그인 사용
-         AdMob.showRewardVideo({ adId: 'ca-app-pub-XXX/XXX' })
-              .then(() => unlockResult());
-       ═══════════════════════════════════════════════════ */
-
-    .mock-ad-brand {
-      font-size: 0.65rem; color: rgba(255,255,255,0.4);
-      position: absolute; top: 10px; left: 14px; letter-spacing: 0.08em;
-    }
-    .mock-ad-skip-label {
-      font-size: 0.65rem; color: rgba(255,255,255,0.4);
-      position: absolute; top: 10px; right: 14px;
-    }
-    .mock-ad-content {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-    }
-    .mock-ad-icon { font-size: 2.8rem; }
-    .mock-ad-headline {
-      font-size: 0.95rem; font-weight: 700; color: #fff; text-align: center;
-    }
-    .mock-ad-cta {
-      background: #f7a8c0; border-radius: 20px;
-      padding: 6px 18px; font-size: 0.8rem; font-weight: 700; color: #fff;
-      margin-top: 4px;
-    }
-    .mock-ad-progress {
-      position: absolute; bottom: 0; left: 0;
-      height: 3px; background: #7ec8e3;
-      width: 0%; transition: width 0.1s linear;
-      border-radius: 0 0 0 16px;
-    }
-
-    .ad-countdown-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 10px; margin-bottom: 16px;
-    }
-    .countdown-track {
-      flex: 1; height: 6px; background: #e8edf5; border-radius: 10px; overflow: hidden;
-    }
-    .countdown-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #7ec8e3, #f7a8c0);
-      border-radius: 10px;
-      width: 100%;
-      transition: width 0.1s linear;
-    }
-    .countdown-text {
-      font-size: 0.8rem; font-weight: 700; color: #7ec8e3; min-width: 28px; text-align: right;
-    }
-
-    .btn-watch-done {
-      width: 100%;
-      padding: 14px;
-      background: #e0e0e0;
-      border: none; border-radius: 14px;
-      font-family: 'Pretendard', sans-serif;
-      font-size: 1rem; font-weight: 700; color: #aaa;
-      cursor: not-allowed;
-      transition: background 0.3s, color 0.3s;
-    }
-    .btn-watch-done.ready {
-      background: linear-gradient(135deg, #7ec8e3 0%, #f7a8c0 100%);
-      color: #fff; cursor: pointer;
-      box-shadow: 0 4px 18px rgba(126, 200, 227, 0.35);
-      animation: pulse 1s ease infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.02); }
-    }
-
-    .adgate-notice {
-      font-size: 0.72rem; color: #bbb; line-height: 1.6; margin-top: 12px;
-    }
-
-    /* ── Loading Screen ────────────────────────── */
+    /* ── 로딩 ── */
     #screen-loading { text-align: center; padding-top: 52px; padding-bottom: 60px; }
-    .spinner {
-      width: 60px; height: 60px;
-      border: 5px solid #e8f4fd;
-      border-top-color: #7ec8e3;
-      border-radius: 50%;
-      animation: spin 0.9s linear infinite;
-      margin: 0 auto 22px;
-    }
+    .spinner { width: 58px; height: 58px; border: 5px solid #e8f4fd; border-top-color: #7ec8e3;
+      border-radius: 50%; animation: spin 0.9s linear infinite; margin: 0 auto 20px; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-title { font-size: 1rem; font-weight: 700; color: #3d3d5c; margin-bottom: 8px; }
-    .loading-sub   { font-size: 0.8rem; color: #8888aa; line-height: 1.65; }
-    .loading-dots::after {
-      content: '';
-      animation: dots 1.5s steps(4, end) infinite;
-    }
-    @keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+    .loading-title { font-size: 0.95rem; font-weight: 700; color: #3d3d5c; margin-bottom: 7px; }
+    .loading-sub   { font-size: 0.78rem; color: #8888aa; line-height: 1.65; }
+    .loading-dots::after { content: ''; animation: dots 1.5s steps(4,end) infinite; }
+    @keyframes dots { 0%{content:'';} 25%{content:'.';} 50%{content:'..';} 75%{content:'...';} }
 
-    /* ── Result Screen ─────────────────────────── */
-    .result-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: #eef7fd; border-radius: 30px;
-      padding: 5px 13px; font-size: 0.76rem; font-weight: 600; color: #5599bb;
-      margin-bottom: 12px;
-    }
-    .result-summary {
-      background: linear-gradient(135deg, #eef7fd, #fdf0f5);
-      border-radius: 14px; padding: 14px;
-      font-size: 0.86rem; color: #4a4a6a; line-height: 1.7;
-      margin-bottom: 20px; border-left: 4px solid #7ec8e3;
-    }
-    .section-title {
-      font-size: 0.82rem; font-weight: 700; color: #8888aa;
-      letter-spacing: 0.04em; margin-bottom: 10px; text-transform: uppercase;
-    }
-    .name-card {
-      border: 1.5px solid #ece8f8; border-radius: 16px;
-      padding: 14px; margin-bottom: 10px; position: relative; overflow: hidden;
-    }
-    .name-card::before {
-      content: ''; position: absolute; top: 0; left: 0;
-      width: 4px; height: 100%;
-    }
-    .name-card:nth-child(1)::before { background: #7ec8e3; }
-    .name-card:nth-child(2)::before { background: #f7a8c0; }
-    .name-card:nth-child(3)::before { background: #b5d5a8; }
-    .name-rank { font-size: 0.7rem; font-weight: 700; color: #aaa; margin-bottom: 5px; }
-    .name-row  { display: flex; align-items: baseline; gap: 8px; margin-bottom: 7px; }
-    .name-kor  { font-size: 1.45rem; font-weight: 800; color: #3d3d5c; }
-    .name-han  { font-size: 0.88rem; color: #888; }
-    .name-ohaeng { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
-    .tag { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+    /* ── 결과 ── */
+    .result-badge { display: inline-flex; align-items: center; gap: 5px;
+      background: #eef7fd; border-radius: 30px; padding: 5px 12px;
+      font-size: 0.74rem; font-weight: 600; color: #5599bb; margin-bottom: 12px; }
+
+    /* 사주오행 분포 카드 */
+    .saju-card { background: linear-gradient(135deg, #eef7fd, #fdf0f5);
+      border-radius: 14px; padding: 14px; margin-bottom: 16px; }
+    .saju-card-title { font-size: 0.78rem; font-weight: 700; color: #5a5a7a; margin-bottom: 10px; }
+    .saju-summary-text { font-size: 0.82rem; color: #4a4a6a; line-height: 1.65;
+      margin-bottom: 12px; border-left: 3px solid #7ec8e3; padding-left: 10px; }
+    .ohaeng-bars { display: flex; flex-direction: column; gap: 6px; }
+    .ohaeng-row { display: flex; align-items: center; gap: 8px; }
+    .ohaeng-label { font-size: 0.72rem; font-weight: 700; width: 38px; text-align: right; }
+    .ohaeng-track { flex: 1; height: 8px; background: #eee; border-radius: 10px; overflow: hidden; }
+    .ohaeng-fill { height: 100%; border-radius: 10px; transition: width 0.8s ease; }
+    .ohaeng-pct { font-size: 0.68rem; color: #999; width: 28px; }
+    .wood-color  { background: #66bb6a; color: #388e3c; }
+    .fire-color  { background: #ef5350; color: #c62828; }
+    .earth-color { background: #ffa726; color: #e65100; }
+    .metal-color { background: #bdbdbd; color: #555; }
+    .water-color { background: #42a5f5; color: #1565c0; }
+    .missing-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px; }
+    .missing-tag { font-size: 0.7rem; font-weight: 600; padding: 3px 9px;
+      border-radius: 20px; background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+
+    .section-title { font-size: 0.8rem; font-weight: 700; color: #8888aa;
+      letter-spacing: 0.04em; margin-bottom: 10px; }
+
+    /* 이름 카드 */
+    .name-card { border: 1.5px solid #ece8f8; border-radius: 18px;
+      margin-bottom: 14px; overflow: hidden; }
+    .name-card-header { padding: 14px 14px 10px; position: relative; }
+    .name-card:nth-child(1) .name-card-header { border-top: 4px solid #7ec8e3; }
+    .name-card:nth-child(2) .name-card-header { border-top: 4px solid #f7a8c0; }
+    .name-card:nth-child(3) .name-card-header { border-top: 4px solid #b5d5a8; }
+    .name-rank { font-size: 0.68rem; font-weight: 700; color: #aaa; margin-bottom: 4px; }
+    .name-top-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .name-kor { font-size: 1.5rem; font-weight: 800; color: #3d3d5c; }
+
+    /* 총점 원형 */
+    .score-ring { position: relative; width: 52px; height: 52px; }
+    .score-ring svg { transform: rotate(-90deg); }
+    .score-ring-bg { fill: none; stroke: #eee; stroke-width: 4; }
+    .score-ring-fill { fill: none; stroke-width: 4; stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease; }
+    .score-ring-text { position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; }
+    .score-num { font-size: 0.88rem; font-weight: 800; color: #3d3d5c; line-height: 1; }
+    .score-label { font-size: 0.55rem; color: #aaa; }
+
+    /* 항목별 점수 그리드 */
+    .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px;
+      padding: 0 14px 12px; }
+    .score-item { background: #f8f9ff; border-radius: 10px; padding: 8px 10px; }
+    .score-item-label { font-size: 0.65rem; color: #888; margin-bottom: 4px; }
+    .score-item-bar { height: 5px; background: #eee; border-radius: 10px; overflow: hidden; margin-bottom: 3px; }
+    .score-item-fill { height: 100%; border-radius: 10px; }
+    .score-item-val { font-size: 0.72rem; font-weight: 700; color: #3d3d5c; }
+
+    /* 발음오행/음양 */
+    .analysis-section { padding: 0 14px 12px; }
+    .analysis-label { font-size: 0.7rem; font-weight: 700; color: #8888aa;
+      margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .syllable-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .syllable-chip { background: #f0f4ff; border-radius: 10px; padding: 6px 10px; text-align: center; min-width: 60px; }
+    .syllable-kor { font-size: 1rem; font-weight: 700; color: #3d3d5c; }
+    .syllable-meta { font-size: 0.62rem; color: #888; margin-top: 2px; }
+    .syllable-ohaeng { font-size: 0.65rem; font-weight: 600; margin-top: 2px; }
+
+    /* 사격수리 */
+    .sagek-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+    .sagek-item { background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 8px 10px; }
+    .sagek-name { font-size: 0.65rem; color: #999; margin-bottom: 2px; }
+    .sagek-num  { font-size: 1rem; font-weight: 800; color: #3d3d5c; margin-bottom: 2px; }
+    .sagek-luck { display: inline-block; font-size: 0.62rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 20px; margin-bottom: 3px; }
+    .luck-대길 { background: #e8f5e9; color: #388e3c; }
+    .luck-길   { background: #e3f2fd; color: #1565c0; }
+    .luck-평   { background: #fff3e0; color: #e65100; }
+    .luck-흉   { background: #fce4ec; color: #c62828; }
+    .sagek-desc { font-size: 0.62rem; color: #777; line-height: 1.4; }
+
+    /* 한자 추천 */
+    .hanja-section { padding: 0 14px 14px; }
+    .hanja-syllable-group { margin-bottom: 10px; }
+    .hanja-syllable-title { font-size: 0.7rem; font-weight: 700; color: #5a5a7a; margin-bottom: 6px; }
+    .hanja-options { display: flex; gap: 6px; flex-wrap: wrap; }
+    .hanja-chip { border: 1.5px solid #e0ddf5; border-radius: 10px; padding: 6px 9px;
+      text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; min-width: 68px; }
+    .hanja-chip:hover { border-color: #7ec8e3; background: #f0f9fd; }
+    .hanja-chip.selected { border-color: #7ec8e3; background: #e8f7fd; }
+    .hanja-char { font-size: 1.1rem; font-weight: 700; color: #3d3d5c; }
+    .hanja-mean { font-size: 0.6rem; color: #888; margin-top: 1px; }
+    .hanja-strokes { font-size: 0.58rem; color: #aaa; }
+    .hanja-oh { font-size: 0.6rem; font-weight: 600; margin-top: 1px; }
+
+    /* 접기/펼치기 */
+    .detail-toggle { width: 100%; padding: 9px; background: #f8f8ff; border: none;
+      font-family: 'Pretendard', sans-serif; font-size: 0.78rem; font-weight: 600;
+      color: #8888cc; cursor: pointer; border-top: 1px solid #f0eeff;
+      transition: background 0.15s; }
+    .detail-toggle:hover { background: #f0eeff; }
+    .detail-body { display: none; border-top: 1px solid #f5f3ff; }
+    .detail-body.open { display: block; }
+
+    .ad-result-mid { margin: 12px 0; border-radius: 12px; overflow: hidden; }
+    .btn-secondary { width: 100%; padding: 13px; background: #f4f4fb;
+      border: 1.5px solid #e0ddf5; border-radius: 14px;
+      font-family: 'Pretendard', sans-serif; font-size: 0.92rem; font-weight: 700;
+      color: #7070a8; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
+    .btn-secondary:hover { background: #eae8f8; }
+
+    /* ── 이름 더보기 버튼 ── */
+    .btn-more-names {
+      width: 100%; padding: 14px; margin-top: 4px;
+      background: linear-gradient(135deg, #ffe0b2 0%, #f7c8e0 100%);
+      border: none; border-radius: 14px;
+      font-family: 'Pretendard', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: #c0622a; cursor: pointer;
+      box-shadow: 0 3px 12px rgba(247,168,120,0.3);
+      transition: transform 0.15s, box-shadow 0.15s; }
+    .btn-more-names:hover { transform: translateY(-2px); box-shadow: 0 5px 16px rgba(247,168,120,0.4); }
+    .btn-more-names:active { transform: translateY(0); }
+
+    /* 추가 이름 섹션 구분선 */
+    .more-names-divider {
+      display: flex; align-items: center; gap: 10px; margin: 16px 0 12px; }
+    .more-names-divider::before, .more-names-divider::after {
+      content: ''; flex: 1; height: 1px; background: #f0eeff; }
+    .more-names-divider span {
+      font-size: 0.72rem; font-weight: 700; color: #b0a8d8;
+      white-space: nowrap; padding: 3px 10px;
+      background: #f8f7ff; border-radius: 20px; border: 1px solid #e8e4f8; }
+
+    /* 추가 이름 카드 순위 색상 */
+    .name-card.extra:nth-child(1) .name-card-header { border-top-color: #c3a8e3; }
+    .name-card.extra:nth-child(2) .name-card-header { border-top-color: #a8c8e3; }
+    .name-card.extra:nth-child(3) .name-card-header { border-top-color: #e3c8a8; }
+
+    .disclaimer { font-size: 0.68rem; color: #bbb; text-align: center; margin-top: 12px; line-height: 1.6; }
+    .ad-footer { width: 100%; max-width: 400px; margin-top: 12px; }
+
+    .tag { display: inline-block; padding: 3px 8px; border-radius: 20px; font-size: 0.68rem; font-weight: 600; }
     .tag-wood  { background: #e8f5e9; color: #388e3c; }
     .tag-water { background: #e3f2fd; color: #1565c0; }
     .tag-fire  { background: #fff3e0; color: #e65100; }
     .tag-earth { background: #fdf3d1; color: #7b5c00; }
     .tag-metal { background: #f3f3f3; color: #555; }
-    .name-desc { font-size: 0.8rem; color: #666; line-height: 1.65; }
-
-    /* 결과 화면 중간 광고 */
-    .ad-result-mid {
-      margin: 16px 0;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .btn-secondary {
-      width: 100%;
-      padding: 13px;
-      background: #f4f4fb; border: 1.5px solid #e0ddf5;
-      border-radius: 14px;
-      font-family: 'Pretendard', sans-serif;
-      font-size: 0.95rem; font-weight: 700; color: #7070a8;
-      cursor: pointer; margin-top: 8px; transition: background 0.15s;
-    }
-    .btn-secondary:hover { background: #eae8f8; }
-    .disclaimer { font-size: 0.7rem; color: #bbb; text-align: center; margin-top: 14px; line-height: 1.6; }
-
-    /* ── 하단 고정 배너 광고 ────────────────────── */
-    .ad-footer {
-      width: 100%; max-width: 400px; margin-top: 12px;
-    }
   </style>
 </head>
 <body>
 
-  <!-- ① 상단 배너 광고 -->
-  <div class="ad-banner-top">
-    <!-- ═══════════════════════════════════════════════════════
-         [광고] AdSense 배너 (728×90 또는 반응형)
-         실제 운영 시 아래 div.ad-placeholder를 AdSense 코드로 교체:
-         <ins class="adsbygoogle"
-              style="display:block"
-              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-              data-ad-slot="XXXXXXXXXX"
-              data-ad-format="auto"
-              data-full-width-responsive="true"></ins>
-         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-         ═══════════════════════════════════════════════════ -->
-    <div class="ad-placeholder banner">광고 영역 (상단 배너)</div>
+<div class="ad-banner-top">
+  <div class="ad-placeholder banner">광고 영역 (상단 배너)</div>
+</div>
+
+<div class="app">
+  <div class="app-header">
+    <div class="logo">👶✨</div>
+    <h1>AI 사주 작명</h1>
+    <p>사주팔자 음양오행으로 최적의 이름을 찾아드립니다</p>
   </div>
 
-  <div class="app">
-
-    <!-- Header -->
-    <div class="app-header">
-      <div class="logo">👶✨</div>
-      <h1>AI 사주 작명</h1>
-      <p>사주팔자 음양오행으로 최적의 이름을 찾아드립니다</p>
+  <!-- ① 입력 -->
+  <div class="screen active" id="screen-input">
+    <div class="field">
+      <label>성씨</label>
+      <input type="text" id="last-name" placeholder="예: 김, 이, 박" maxlength="2" />
     </div>
-
-    <!-- ① 입력 화면 -->
-    <div class="screen active" id="screen-input">
-      <div class="field">
-        <label>성씨</label>
-        <input type="text" id="last-name" placeholder="예: 김, 이, 박" maxlength="2" />
-      </div>
-      <div class="field">
-        <label>아기 성별</label>
-        <div class="select-wrap">
-          <select id="gender">
-            <option value="미정">미정 (아직 모름)</option>
-            <option value="남아">남아 👦</option>
-            <option value="여아">여아 👧</option>
-          </select>
-        </div>
-      </div>
-      <div class="field">
-        <label>태어난 날짜</label>
-        <input type="date" id="birth-date" />
-      </div>
-      <div class="field">
-        <label>태어난 시간 <span style="color:#bbb;font-weight:400">(모르면 비워도 됩니다)</span></label>
-        <input type="time" id="birth-time" />
-      </div>
-
-      <button class="btn-primary" onclick="goToAdGate()">
-        🔮 AI 사주 분석 및 이름 추천받기
-      </button>
-
-      <!-- 입력 화면 하단 인라인 광고 -->
-      <div class="ad-banner-inline">
-        <!-- ═══════════════════════════════════════════════════════
-             [광고] AdSense 인라인 직사각형 (300×250)
-             실제 운영 시 교체:
-             <ins class="adsbygoogle"
-                  style="display:block"
-                  data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                  data-ad-slot="XXXXXXXXXX"
-                  data-ad-format="rectangle"></ins>
-             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-             ═══════════════════════════════════════════════════ -->
-        <div class="ad-placeholder large">광고 영역 (입력 화면 하단)</div>
-      </div>
-
-      <p class="disclaimer">입력하신 정보는 이름 추천에만 사용되며 저장되지 않습니다.</p>
-    </div>
-
-    <!-- ② 광고 시청 게이트 화면 -->
-    <div class="screen" id="screen-adgate">
-      <div class="adgate-title">🎬 광고를 시청하고 결과를 확인하세요</div>
-      <div class="adgate-sub">짧은 광고 시청 후 AI 사주 분석 결과를<br />무료로 확인할 수 있습니다</div>
-
-      <!-- 모의 광고 크리에이티브 -->
-      <!-- ═══════════════════════════════════════════════════════
-           [광고] 여기를 실제 광고 슬롯으로 교체하세요.
-
-           웹 — AdSense 디스플레이 광고:
-             <ins class="adsbygoogle"
-                  style="display:block;min-height:200px"
-                  data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                  data-ad-slot="XXXXXXXXXX"
-                  data-ad-format="rectangle"></ins>
-             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-           Android 앱(Capacitor + AdMob) — JS 예시:
-             import { AdMob, RewardAdPluginEvents } from '@capacitor-community/admob';
-             await AdMob.prepareRewardVideoAd({ adId: 'ca-app-pub-XXX/XXX' });
-             AdMob.addListener(RewardAdPluginEvents.Rewarded, () => unlockResult());
-             await AdMob.showRewardVideoAd();
-
-           네이티브 Android(Java) — AdMob:
-             RewardedAd.load(context, "ca-app-pub-XXX/XXX", new AdRequest.Builder().build(),
-               new RewardedAdLoadCallback() {
-                 public void onAdLoaded(RewardedAd ad) {
-                   ad.show(activity, reward -> unlockResult());
-                 }
-               });
-           ═══════════════════════════════════════════════════ -->
-      <div class="mock-ad-box" id="mock-ad">
-        <div class="mock-ad-brand">AD</div>
-        <div class="mock-ad-skip-label" id="skip-label">광고 시청 중...</div>
-        <div class="mock-ad-content">
-          <div class="mock-ad-icon">🌟</div>
-          <div class="mock-ad-headline">귀여운 아기 용품<br />지금 최대 50% 할인!</div>
-          <div class="mock-ad-cta">지금 보러가기</div>
-        </div>
-        <div class="mock-ad-progress" id="ad-progress"></div>
-      </div>
-
-      <!-- 카운트다운 바 -->
-      <div class="ad-countdown-bar">
-        <div class="countdown-track">
-          <div class="countdown-fill" id="countdown-fill"></div>
-        </div>
-        <div class="countdown-text" id="countdown-text">5</div>
-      </div>
-
-      <button class="btn-watch-done" id="btn-done" onclick="onAdComplete()" disabled>
-        ⏳ 광고 시청 중... (<span id="btn-countdown">5</span>초)
-      </button>
-
-      <p class="adgate-notice">
-        광고 수익은 서비스 무료 운영에 사용됩니다.<br />
-        광고를 시청해 주셔서 감사합니다 🙏
-      </p>
-    </div>
-
-    <!-- ③ 로딩 화면 -->
-    <div class="screen" id="screen-loading">
-      <div class="spinner"></div>
-      <div class="loading-title">AI가 사주팔자를 분석 중입니다<span class="loading-dots"></span></div>
-      <div class="loading-sub">
-        생년월일시의 음양오행을 계산하고<br />
-        부족한 기운을 보완하는 이름을 찾고 있어요
+    <div class="field">
+      <label>아기 성별</label>
+      <div class="select-wrap">
+        <select id="gender">
+          <option value="미정">미정 (아직 모름)</option>
+          <option value="남아">남아 👦</option>
+          <option value="여아">여아 👧</option>
+        </select>
       </div>
     </div>
+    <div class="field">
+      <label>태어난 날짜</label>
+      <input type="date" id="birth-date" />
+    </div>
+    <div class="field">
+      <label>태어난 시간 <span style="color:#bbb;font-weight:400">(모르면 비워도 됩니다)</span></label>
+      <input type="time" id="birth-time" />
+    </div>
+    <button class="btn-primary" onclick="goToAdGate()">🔮 AI 사주 분석 및 이름 추천받기</button>
+    <div class="ad-banner-inline">
+      <div class="ad-placeholder large">광고 영역 (입력 화면 하단)</div>
+    </div>
+    <p class="disclaimer">입력하신 정보는 이름 추천에만 사용되며 저장되지 않습니다.</p>
+  </div>
 
-    <!-- ④ 결과 화면 -->
-    <div class="screen" id="screen-result">
-      <div class="result-badge">🌟 사주 분석 완료</div>
-      <div class="result-summary" id="saju-summary"></div>
+  <!-- ② 광고 게이트 -->
+  <div class="screen" id="screen-adgate">
+    <div class="adgate-title">🎬 광고를 시청하고 결과를 확인하세요</div>
+    <div class="adgate-sub">짧은 광고 시청 후 AI 사주 분석 결과를<br/>무료로 확인할 수 있습니다</div>
+    <div class="mock-ad-box" id="mock-ad">
+      <div class="mock-ad-brand">AD</div>
+      <div class="mock-ad-skip-label" id="skip-label">광고 시청 중...</div>
+      <div class="mock-ad-content">
+        <div class="mock-ad-icon">🌟</div>
+        <div class="mock-ad-headline">귀여운 아기 용품<br/>지금 최대 50% 할인!</div>
+        <div class="mock-ad-cta">지금 보러가기</div>
+      </div>
+      <div class="mock-ad-progress" id="ad-progress"></div>
+    </div>
+    <div class="ad-countdown-bar">
+      <div class="countdown-track"><div class="countdown-fill" id="countdown-fill"></div></div>
+      <div class="countdown-text" id="countdown-text">5</div>
+    </div>
+    <button class="btn-watch-done" id="btn-done" onclick="onAdComplete()" disabled>
+      ⏳ 광고 시청 중... (<span id="btn-countdown">5</span>초)
+    </button>
+    <p class="adgate-notice">광고 수익은 서비스 무료 운영에 사용됩니다. 감사합니다 🙏</p>
+  </div>
 
-      <div class="section-title">✨ 추천 이름 베스트 3</div>
-      <div id="name-list"></div>
+  <!-- ③ 로딩 -->
+  <div class="screen" id="screen-loading">
+    <div class="spinner"></div>
+    <div class="loading-title">AI가 사주팔자를 분석 중입니다<span class="loading-dots"></span></div>
+    <div class="loading-sub">발음오행·사격수리·수리오행을 종합 계산 중<br/>잠시만 기다려 주세요</div>
+  </div>
 
-      <!-- 결과 화면 중간 광고 -->
+  <!-- ④ 결과 -->
+  <div class="screen" id="screen-result">
+    <div class="result-badge">🌟 사주 분석 완료</div>
+
+    <!-- 사주오행 분포 -->
+    <div class="saju-card" id="saju-ohaeng-card"></div>
+
+    <div class="section-title">✨ 추천 이름 베스트 3</div>
+    <div id="name-list"></div>
+
+    <div class="ad-result-mid">
+      <div class="ad-placeholder banner">광고 영역 (결과 화면 중간)</div>
+    </div>
+
+    <!-- 추가 이름 더보기 버튼 -->
+    <button class="btn-more-names" id="btn-more-names" onclick="requestMoreNames()">
+      🎁 광고 보고 이름 3개 더 받기
+    </button>
+
+    <!-- 추가 이름 결과 영역 -->
+    <div id="extra-name-area" style="display:none">
+      <div class="more-names-divider"><span>✨ 추가 추천 이름</span></div>
+      <div id="extra-name-list"></div>
       <div class="ad-result-mid">
-        <!-- ═══════════════════════════════════════════════════════
-             [광고] 결과 화면 중간 배너
-             실제 운영 시 교체:
-             <ins class="adsbygoogle"
-                  style="display:block"
-                  data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                  data-ad-slot="XXXXXXXXXX"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"></ins>
-             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-             ═══════════════════════════════════════════════════ -->
-        <div class="ad-placeholder banner">광고 영역 (결과 화면 중간)</div>
+        <div class="ad-placeholder banner">광고 영역 (추가 이름 하단)</div>
       </div>
-
-      <button class="btn-secondary" onclick="resetApp()">↩ 다시 하기</button>
-      <p class="disclaimer">AI 추천 이름은 참고용이며, 최종 선택은 부모님의 결정을 따릅니다.</p>
     </div>
 
-  </div><!-- /.app -->
-
-  <!-- 하단 고정 배너 광고 -->
-  <div class="ad-footer">
-    <!-- ═══════════════════════════════════════════════════════
-         [광고] 하단 고정 배너
-         실제 운영 시 교체:
-         <ins class="adsbygoogle"
-              style="display:block"
-              data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-              data-ad-slot="XXXXXXXXXX"
-              data-ad-format="auto"
-              data-full-width-responsive="true"></ins>
-         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-         ═══════════════════════════════════════════════════ -->
-    <div class="ad-placeholder banner">광고 영역 (하단 배너)</div>
+    <button class="btn-secondary" onclick="resetApp()">↩ 다시 하기</button>
+    <p class="disclaimer">AI 추천 이름은 참고용이며, 최종 선택은 부모님의 결정을 따릅니다.</p>
   </div>
+</div>
+
+<div class="ad-footer">
+  <div class="ad-placeholder banner">광고 영역 (하단 배너)</div>
+</div>
 
 <script>
-  /* ──────────────────────────────────────────────────────────────
-   * 상태
-   * ────────────────────────────────────────────────────────────── */
-  const state = { lastName: '', gender: '', birthDate: '', birthTime: '' };
+  const state = { lastName:'', gender:'', birthDate:'', birthTime:'' };
   let adTimer = null;
+  let adMode = 'first'; // 'first' | 'more'
+  let moreCount = 0;    // 더보기 횟수 (최대 3회)
+  const MAX_MORE = 3;
 
-  /* ──────────────────────────────────────────────────────────────
-   * 화면 전환
-   * ────────────────────────────────────────────────────────────── */
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
 
-  /* ──────────────────────────────────────────────────────────────
-   * Step 1: 입력 → 광고 게이트로 이동
-   * ────────────────────────────────────────────────────────────── */
   function goToAdGate() {
     const lastName  = document.getElementById('last-name').value.trim();
     const birthDate = document.getElementById('birth-date').value;
-
     if (!lastName)  { alert('성씨를 입력해 주세요.'); return; }
     if (!birthDate) { alert('태어난 날짜를 선택해 주세요.'); return; }
-
     state.lastName  = lastName;
     state.gender    = document.getElementById('gender').value;
     state.birthDate = birthDate;
     state.birthTime = document.getElementById('birth-time').value;
-
     showScreen('screen-adgate');
     startAdCountdown();
   }
 
-  /* ──────────────────────────────────────────────────────────────
-   * Step 2: 광고 카운트다운 (5초)
-   * ────────────────────────────────────────────────────────────── */
   function startAdCountdown() {
-    const DURATION = 5; // 광고 시청 강제 시간(초) — 필요 시 조정
+    const DURATION = 5;
     let elapsed = 0;
-    const interval = 100; // ms
-
-    const fillEl    = document.getElementById('countdown-fill');
-    const textEl    = document.getElementById('countdown-text');
-    const btnEl     = document.getElementById('btn-done');
-    const btnCntEl  = document.getElementById('btn-countdown');
-    const progressEl = document.getElementById('ad-progress');
-
-    // 초기화
+    const fillEl = document.getElementById('countdown-fill');
+    const textEl = document.getElementById('countdown-text');
+    const btnEl  = document.getElementById('btn-done');
+    const progEl = document.getElementById('ad-progress');
     fillEl.style.width = '100%';
     textEl.textContent = DURATION;
-    btnEl.disabled = true;
-    btnEl.classList.remove('ready');
+    btnEl.disabled = true; btnEl.classList.remove('ready');
     btnEl.innerHTML = `⏳ 광고 시청 중... (<span id="btn-countdown">${DURATION}</span>초)`;
-
     clearInterval(adTimer);
     adTimer = setInterval(() => {
-      elapsed += interval;
+      elapsed += 100;
       const remaining = Math.ceil((DURATION * 1000 - elapsed) / 1000);
       const pct = Math.max(0, ((DURATION * 1000 - elapsed) / (DURATION * 1000)) * 100);
-
       fillEl.style.width = pct + '%';
-      progressEl.style.width = (100 - pct) + '%';
+      progEl.style.width = (100 - pct) + '%';
       document.getElementById('countdown-text').textContent = remaining;
-
-      const btnCnt = document.getElementById('btn-countdown');
-      if (btnCnt) btnCnt.textContent = remaining;
-
+      const bc = document.getElementById('btn-countdown');
+      if (bc) bc.textContent = remaining;
       if (elapsed >= DURATION * 1000) {
         clearInterval(adTimer);
-        // 광고 시청 완료 → 버튼 활성화
         fillEl.style.width = '0%';
         document.getElementById('countdown-text').textContent = '✓';
         document.getElementById('skip-label').textContent = '시청 완료!';
-        btnEl.disabled = false;
-        btnEl.classList.add('ready');
+        btnEl.disabled = false; btnEl.classList.add('ready');
         btnEl.textContent = '✅ 결과 확인하기';
       }
-    }, interval);
+    }, 100);
   }
 
-  /* ──────────────────────────────────────────────────────────────
-   * Step 3: 광고 완료 → 분석 시작
-   * ────────────────────────────────────────────────────────────── */
+  /* ── 추가 이름 요청 ── */
+  function requestMoreNames() {
+    if (moreCount >= MAX_MORE) return;
+    adMode = 'more';
+    document.getElementById('skip-label').textContent = '광고 시청 중...';
+    showScreen('screen-adgate');
+    startAdCountdown();
+  }
+
   function onAdComplete() {
+    if (adMode === 'more') {
+      showMoreNamesLoading();
+      return;
+    }
     showScreen('screen-loading');
-    startAnalysis();
-  }
-
-  /* ──────────────────────────────────────────────────────────────
-   * Step 4: AI 분석 (현재 Mock — 아래 TODO 참고)
-   * ────────────────────────────────────────────────────────────── */
-  function startAnalysis() {
-    /* ── 실제 AI API 연동 지점 ──────────────────────────────────
-     * TODO: 아래 setTimeout 블록을 실제 API 호출로 교체하세요.
+    /* ── 실제 AI API 연동 지점 ──────────────────────────────
+     * TODO: 아래 setTimeout을 실제 API 호출로 교체하세요.
      *
-     * async function startAnalysis() {
-     *   showScreen('screen-loading');
-     *   try {
-     *     // Claude API 예시:
-     *     const response = await fetch('https://api.anthropic.com/v1/messages', {
-     *       method: 'POST',
-     *       headers: {
-     *         'x-api-key': API_KEY,
-     *         'anthropic-version': '2023-06-01',
-     *         'content-type': 'application/json'
-     *       },
-     *       body: JSON.stringify({
-     *         model: 'claude-opus-4-6',
-     *         max_tokens: 1024,
-     *         messages: [{ role: 'user', content: buildPrompt(state) }]
-     *       })
-     *     });
-     *     const data = await response.json();
-     *     const result = JSON.parse(data.content[0].text);
-     *     renderResult(result);
-     *     showScreen('screen-result');
-     *
-     *     // OpenAI 예시:
-     *     // const response = await fetch('https://api.openai.com/v1/chat/completions', { ... });
-     *     // const data = await response.json();
-     *     // const result = JSON.parse(data.choices[0].message.content);
-     *
-     *   } catch(e) {
-     *     alert('분석 중 오류가 발생했습니다. 다시 시도해 주세요.');
-     *     resetApp();
-     *   }
-     * }
-     * ────────────────────────────────────────────────────────── */
+     * Claude API 예시:
+     *   const res = await fetch('https://api.anthropic.com/v1/messages', {
+     *     method:'POST',
+     *     headers:{'x-api-key':API_KEY,'anthropic-version':'2023-06-01','content-type':'application/json'},
+     *     body: JSON.stringify({ model:'claude-opus-4-6', max_tokens:2048,
+     *       messages:[{role:'user', content: buildPrompt(state)}] })
+     *   });
+     *   const data = await res.json();
+     *   const result = JSON.parse(data.content[0].text);
+     *   renderResult(result); showScreen('screen-result');
+     * ────────────────────────────────────────────────────── */
     setTimeout(() => {
-      const mockResult = getMockResult(state);
-      renderResult(mockResult);
+      const result = getMockResult(state);
+      renderResult(result);
       showScreen('screen-result');
     }, 2500);
   }
 
-  /* ──────────────────────────────────────────────────────────────
-   * AI 프롬프트 빌더 (실제 API 연동 시 사용)
-   * ────────────────────────────────────────────────────────────── */
+  /* ── 프롬프트 빌더 (AI 연동 시 사용) ── */
   function buildPrompt(s) {
-    return `
-당신은 사주팔자 전문가이자 작명 전문가입니다.
-아래 정보를 바탕으로 음양오행을 분석하고 아이 이름 3개를 추천해 주세요.
-- 성씨: ${s.lastName}
-- 성별: ${s.gender}
-- 생년월일: ${s.birthDate}
-- 태어난 시간: ${s.birthTime || '미상'}
+    return `당신은 사주팔자 및 작명 전문가입니다. 아래 정보로 이름 3개를 추천하고 아래 JSON만 반환하세요.
+성씨:${s.lastName} 성별:${s.gender} 생년월일:${s.birthDate} 시간:${s.birthTime||'미상'}
 
-아래 JSON 형식으로만 응답하세요. 다른 텍스트는 절대 포함하지 마세요:
 {
-  "summary": "사주 분석 요약",
-  "names": [
-    { "kor": "한글이름", "han": "한자 (한글)", "tags": ["오행1", "오행2"], "desc": "상세 설명" }
-  ]
+  "sajuOhaeng":{"wood":숫자,"fire":숫자,"earth":숫자,"metal":숫자,"water":숫자},
+  "missingElements":["부족한 오행"],
+  "summary":"사주 분석 요약",
+  "names":[{
+    "kor":"한글이름","totalScore":점수,
+    "scores":{"baleumOhaeng":점수,"baleumEumyang":점수,"sagekSuri":점수,"suriOhaeng":점수,"suriEumyang":점수,"sajuComplement":점수},
+    "syllables":[{"kor":"글자","baleumOhaeng":"오행","eumyang":"양|음","suriOhaeng":"오행","suriEumyang":"양|음"}],
+    "sagek":{"won":{"num":숫자,"name":"격명","luck":"대길|길|평|흉","desc":"설명"},"hyeong":{...},"i":{...},"jeong":{...}},
+    "hanjaOptions":[{"syllable":"글자","options":[{"hanja":"한자","meaning":"뜻","strokes":획수,"ohaeng":"오행"}]}],
+    "desc":"종합 설명"
+  }]
 }`.trim();
   }
 
-  /* ──────────────────────────────────────────────────────────────
+  /* ══════════════════════════════════════════════
    * Mock 데이터 (API 연동 전 테스트용 — 연동 후 삭제)
-   * ────────────────────────────────────────────────────────────── */
+   * ══════════════════════════════════════════════ */
   function getMockResult(s) {
-    const isBoy  = s.gender === '남아';
     const isGirl = s.gender === '여아';
+    const isBoy  = s.gender === '남아';
+
+    const sajuOhaeng = isGirl
+      ? {wood:10, fire:35, earth:30, metal:10, water:15}
+      : {wood:15, fire:40, earth:20, metal:10, water:15};
+
+    const missingElements = isGirl ? ['목(木)','금(金)'] : ['목(木)','수(水)'];
+
+    const summary = isGirl
+      ? `${s.birthDate} 생 여아의 사주는 화(火)·토(土) 기운이 강하고 목(木)·금(金)이 부족합니다. 창의성과 섬세함을 더해줄 이름이 오행의 균형을 맞춰줄 것입니다.`
+      : `${s.birthDate} 생 남아의 사주는 화(火) 기운이 매우 강하고 목(木)·수(水)가 부족합니다. 성장·지혜의 기운을 보완하는 이름이 조화로운 삶을 이끌어 줄 것입니다.`;
 
     const boyNames = [
-      { kor: s.lastName+'준서', han: '俊瑞 (준서)', tags: ['목(木)','수(水)'],
-        desc: '俊(뛰어날 준)은 목(木)의 기운을 더해 성장·창의의 에너지를 보완합니다. 瑞(상서로울 서)는 수(水)의 기운으로 유연성과 지혜를 강화하여 풍요롭게 자랄 이름입니다.' },
-      { kor: s.lastName+'도윤', han: '道潤 (도윤)', tags: ['수(水)','토(土)'],
-        desc: '道(길 도)는 토(土)로 사주의 안정감을 높이고, 潤(윤택할 윤)은 수(水)의 흐름으로 감수성과 포용력을 북돋습니다. 균형 잡힌 성격과 리더십이 기대됩니다.' },
-      { kor: s.lastName+'시우', han: '時宇 (시우)', tags: ['화(火)','목(木)'],
-        desc: '時(때 시)는 화(火)의 밝은 빛으로 활동성과 열정을 살리고, 宇(집 우)는 목(木)으로 넓은 포부를 상징합니다. 사교적이고 열정적인 아이로 자라날 이름입니다.' }
+      {
+        kor: s.lastName+'준서', totalScore: 93,
+        scores: {baleumOhaeng:92, baleumEumyang:90, sagekSuri:88, suriOhaeng:95, suriEumyang:94, sajuComplement:98},
+        syllables: [
+          {kor:'준', baleumOhaeng:'목(木)', eumyang:'양(陽)', suriOhaeng:'화(火)', suriEumyang:'양(陽)'},
+          {kor:'서', baleumOhaeng:'금(金)', eumyang:'음(陰)', suriOhaeng:'수(水)', suriEumyang:'음(陰)'},
+        ],
+        sagek: {
+          won:   {num:23, name:'공명격(功名格)', luck:'대길', desc:'이름을 크게 떨치고 사회적 명성을 얻는 격'},
+          hyeong:{num:16, name:'덕망격(德望格)', luck:'대길', desc:'덕이 높고 주변의 신망이 두터운 격'},
+          i:     {num:14, name:'산재격(散財格)', luck:'평',   desc:'재물 관리에 주의가 필요하나 노력으로 극복'},
+          jeong: {num:21, name:'두령격(頭領格)', luck:'길',   desc:'리더십이 강하고 조직을 이끄는 힘이 있는 격'},
+        },
+        hanjaOptions: [
+          {syllable:'준', options:[
+            {hanja:'俊', meaning:'뛰어날 준', strokes:9,  ohaeng:'목(木)'},
+            {hanja:'峻', meaning:'높을 준',   strokes:10, ohaeng:'토(土)'},
+            {hanja:'準', meaning:'기준 준',   strokes:13, ohaeng:'수(水)'},
+            {hanja:'埈', meaning:'높을 준',   strokes:10, ohaeng:'토(土)'},
+          ]},
+          {syllable:'서', options:[
+            {hanja:'瑞', meaning:'상서로울 서', strokes:13, ohaeng:'금(金)'},
+            {hanja:'緖', meaning:'실마리 서',   strokes:14, ohaeng:'금(金)'},
+            {hanja:'書', meaning:'글 서',       strokes:10, ohaeng:'목(木)'},
+            {hanja:'棲', meaning:'깃들 서',     strokes:12, ohaeng:'목(木)'},
+          ]},
+        ],
+        desc:'목(木)과 수(水)의 부족한 기운을 발음오행·수리오행 모두에서 강하게 보완합니다. 사격수리 원격·형격이 대길로 사회적 성공과 풍요로운 인생이 기대되는 최적의 이름입니다.'
+      },
+      {
+        kor: s.lastName+'도윤', totalScore: 88,
+        scores: {baleumOhaeng:85, baleumEumyang:92, sagekSuri:84, suriOhaeng:88, suriEumyang:90, sajuComplement:90},
+        syllables: [
+          {kor:'도', baleumOhaeng:'화(火)', eumyang:'음(陰)', suriOhaeng:'목(木)', suriEumyang:'양(陽)'},
+          {kor:'윤', baleumOhaeng:'수(水)', eumyang:'음(陰)', suriOhaeng:'수(水)', suriEumyang:'음(陰)'},
+        ],
+        sagek: {
+          won:   {num:19, name:'장벽격(障壁格)', luck:'평',   desc:'노력이 필요하나 의지력으로 성취하는 격'},
+          hyeong:{num:21, name:'두령격(頭領格)', luck:'길',   desc:'리더십이 강하고 조직을 이끄는 힘이 있는 격'},
+          i:     {num:16, name:'덕망격(德望格)', luck:'대길', desc:'덕이 높고 주변의 신망이 두터운 격'},
+          jeong: {num:24, name:'입신격(立身格)', luck:'길',   desc:'자수성가하여 이름을 세우는 격'},
+        },
+        hanjaOptions: [
+          {syllable:'도', options:[
+            {hanja:'道', meaning:'길 도',   strokes:13, ohaeng:'토(土)'},
+            {hanja:'導', meaning:'인도할 도', strokes:15, ohaeng:'화(火)'},
+            {hanja:'渡', meaning:'건널 도',  strokes:12, ohaeng:'수(水)'},
+            {hanja:'燾', meaning:'덮을 도',  strokes:17, ohaeng:'화(火)'},
+          ]},
+          {syllable:'윤', options:[
+            {hanja:'潤', meaning:'윤택할 윤', strokes:15, ohaeng:'수(水)'},
+            {hanja:'倫', meaning:'인륜 윤',   strokes:10, ohaeng:'금(金)'},
+            {hanja:'胤', meaning:'후손 윤',   strokes:9,  ohaeng:'토(土)'},
+            {hanja:'尹', meaning:'다스릴 윤', strokes:4,  ohaeng:'금(金)'},
+          ]},
+        ],
+        desc:'발음음양의 균형이 뛰어나고 수(水) 기운을 효과적으로 보완합니다. 이격 대길로 덕망 있는 인물로 성장할 이름이며, 안정적이고 포용력 있는 성격이 기대됩니다.'
+      },
+      {
+        kor: s.lastName+'시우', totalScore: 84,
+        scores: {baleumOhaeng:80, baleumEumyang:85, sagekSuri:82, suriOhaeng:86, suriEumyang:88, sajuComplement:85},
+        syllables: [
+          {kor:'시', baleumOhaeng:'금(金)', eumyang:'음(陰)', suriOhaeng:'목(木)', suriEumyang:'양(陽)'},
+          {kor:'우', baleumOhaeng:'수(水)', eumyang:'양(陽)', suriOhaeng:'화(火)', suriEumyang:'음(陰)'},
+        ],
+        sagek: {
+          won:   {num:17, name:'건창격(健暢格)', luck:'길',   desc:'건강하고 활기차게 목표를 이루는 격'},
+          hyeong:{num:14, name:'산재격(散財格)', luck:'평',   desc:'재물 관리에 주의하면 풍요로운 삶 가능'},
+          i:     {num:18, name:'발전격(發展格)', luck:'길',   desc:'꾸준한 발전과 성장이 기대되는 격'},
+          jeong: {num:23, name:'공명격(功名格)', luck:'대길', desc:'이름을 크게 떨치고 사회적 명성을 얻는 격'},
+        },
+        hanjaOptions: [
+          {syllable:'시', options:[
+            {hanja:'時', meaning:'때 시',    strokes:10, ohaeng:'화(火)'},
+            {hanja:'始', meaning:'처음 시',  strokes:8,  ohaeng:'토(土)'},
+            {hanja:'施', meaning:'베풀 시',  strokes:9,  ohaeng:'수(水)'},
+            {hanja:'詩', meaning:'시 시',    strokes:13, ohaeng:'금(金)'},
+          ]},
+          {syllable:'우', options:[
+            {hanja:'宇', meaning:'집 우',    strokes:6,  ohaeng:'토(土)'},
+            {hanja:'佑', meaning:'도울 우',  strokes:7,  ohaeng:'화(火)'},
+            {hanja:'禹', meaning:'임금 우',  strokes:9,  ohaeng:'토(土)'},
+            {hanja:'雨', meaning:'비 우',    strokes:8,  ohaeng:'수(水)'},
+          ]},
+        ],
+        desc:'정격 공명격 대길로 사회에서 이름을 크게 떨칠 이름입니다. 발음오행에서 금(金)·수(水) 기운이 부족한 사주를 보완하여 사교적이고 열정적인 아이로 자라날 것입니다.'
+      }
     ];
 
     const girlNames = [
-      { kor: s.lastName+'서아', han: '瑞雅 (서아)', tags: ['수(水)','금(金)'],
-        desc: '瑞(상서로울 서)는 수(水)의 맑고 지혜로운 기운으로 총명함을 채우고, 雅(우아할 아)는 금(金)으로 섬세함과 아름다운 인품을 빛내줍니다.' },
-      { kor: s.lastName+'하윤', han: '河潤 (하윤)', tags: ['수(水)','목(木)'],
-        desc: '河(강 하)는 수(水)의 풍요로운 기운으로 감성과 포용력을 부여하고, 潤(윤택할 윤)은 목(木)의 생명력으로 건강하고 활기찬 삶을 기원합니다.' },
-      { kor: s.lastName+'나은', han: '娜恩 (나은)', tags: ['화(火)','토(土)'],
-        desc: '娜(예쁠 나)는 화(火)의 생동감으로 밝고 명랑한 성격을 더하고, 恩(은혜 은)은 토(土)의 안정으로 주변에 선한 영향을 미치는 인품을 상징합니다.' }
+      {
+        kor: s.lastName+'서아', totalScore: 95,
+        scores: {baleumOhaeng:95, baleumEumyang:93, sagekSuri:92, suriOhaeng:96, suriEumyang:94, sajuComplement:98},
+        syllables: [
+          {kor:'서', baleumOhaeng:'금(金)', eumyang:'음(陰)', suriOhaeng:'수(水)', suriEumyang:'음(陰)'},
+          {kor:'아', baleumOhaeng:'토(土)', eumyang:'양(陽)', suriOhaeng:'목(木)', suriEumyang:'양(陽)'},
+        ],
+        sagek: {
+          won:   {num:24, name:'입신격(立身格)', luck:'대길', desc:'자수성가하여 이름을 크게 세우는 격'},
+          hyeong:{num:16, name:'덕망격(德望格)', luck:'대길', desc:'덕이 높고 주변의 신망이 두터운 격'},
+          i:     {num:13, name:'지모격(智謀格)', luck:'길',   desc:'지혜롭고 계획적으로 목표를 이루는 격'},
+          jeong: {num:21, name:'두령격(頭領格)', luck:'길',   desc:'리더십과 자립심이 강한 격'},
+        },
+        hanjaOptions: [
+          {syllable:'서', options:[
+            {hanja:'瑞', meaning:'상서로울 서', strokes:13, ohaeng:'금(金)'},
+            {hanja:'緖', meaning:'실마리 서',   strokes:14, ohaeng:'금(金)'},
+            {hanja:'曙', meaning:'새벽 서',     strokes:17, ohaeng:'화(火)'},
+            {hanja:'棲', meaning:'깃들 서',     strokes:12, ohaeng:'목(木)'},
+          ]},
+          {syllable:'아', options:[
+            {hanja:'雅', meaning:'우아할 아',   strokes:12, ohaeng:'금(金)'},
+            {hanja:'娥', meaning:'예쁠 아',     strokes:10, ohaeng:'토(土)'},
+            {hanja:'芽', meaning:'싹 아',       strokes:8,  ohaeng:'목(木)'},
+            {hanja:'兒', meaning:'아이 아',     strokes:8,  ohaeng:'화(火)'},
+          ]},
+        ],
+        desc:'원격·형격 모두 대길로 사주 분석 최고점 이름입니다. 발음오행에서 금(金)·목(木) 부족을 완벽히 보완하고, 발음음양의 음양 균형이 뛰어나 총명하고 품격 있는 여성으로 성장할 이름입니다.'
+      },
+      {
+        kor: s.lastName+'하윤', totalScore: 89,
+        scores: {baleumOhaeng:88, baleumEumyang:90, sagekSuri:86, suriOhaeng:90, suriEumyang:88, sajuComplement:92},
+        syllables: [
+          {kor:'하', baleumOhaeng:'토(土)', eumyang:'양(陽)', suriOhaeng:'목(木)', suriEumyang:'양(陽)'},
+          {kor:'윤', baleumOhaeng:'수(水)', eumyang:'음(陰)', suriOhaeng:'수(水)', suriEumyang:'음(陰)'},
+        ],
+        sagek: {
+          won:   {num:21, name:'두령격(頭領格)', luck:'길',   desc:'리더십이 강하고 조직을 이끄는 힘이 있는 격'},
+          hyeong:{num:18, name:'발전격(發展格)', luck:'길',   desc:'꾸준한 발전과 성장이 기대되는 격'},
+          i:     {num:15, name:'복수격(福壽格)', luck:'대길', desc:'복과 수명이 길고 풍요로운 삶을 누리는 격'},
+          jeong: {num:22, name:'중절격(中折格)', luck:'평',   desc:'중년에 방향 전환이 있을 수 있으나 의지로 극복'},
+        },
+        hanjaOptions: [
+          {syllable:'하', options:[
+            {hanja:'河', meaning:'강 하',    strokes:8,  ohaeng:'수(水)'},
+            {hanja:'夏', meaning:'여름 하',  strokes:10, ohaeng:'화(火)'},
+            {hanja:'霞', meaning:'노을 하',  strokes:17, ohaeng:'화(火)'},
+            {hanja:'荷', meaning:'연꽃 하',  strokes:13, ohaeng:'목(木)'},
+          ]},
+          {syllable:'윤', options:[
+            {hanja:'潤', meaning:'윤택할 윤', strokes:15, ohaeng:'수(水)'},
+            {hanja:'倫', meaning:'인륜 윤',   strokes:10, ohaeng:'금(金)'},
+            {hanja:'胤', meaning:'후손 윤',   strokes:9,  ohaeng:'토(土)'},
+            {hanja:'鈗', meaning:'창 윤',     strokes:12, ohaeng:'금(金)'},
+          ]},
+        ],
+        desc:'이격 복수격 대길로 복과 건강이 넘치는 이름입니다. 발음음양의 양음 균형이 이상적이며 수(水)·목(木) 기운 보완으로 감수성 풍부하고 건강한 아이로 자랄 이름입니다.'
+      },
+      {
+        kor: s.lastName+'나은', totalScore: 82,
+        scores: {baleumOhaeng:80, baleumEumyang:84, sagekSuri:80, suriOhaeng:82, suriEumyang:84, sajuComplement:83},
+        syllables: [
+          {kor:'나', baleumOhaeng:'화(火)', eumyang:'양(陽)', suriOhaeng:'목(木)', suriEumyang:'양(陽)'},
+          {kor:'은', baleumOhaeng:'토(土)', eumyang:'음(陰)', suriOhaeng:'금(金)', suriEumyang:'음(陰)'},
+        ],
+        sagek: {
+          won:   {num:18, name:'발전격(發展格)', luck:'길',   desc:'꾸준한 발전과 성장이 기대되는 격'},
+          hyeong:{num:23, name:'공명격(功名格)', luck:'대길', desc:'이름을 크게 떨치는 격'},
+          i:     {num:16, name:'덕망격(德望格)', luck:'대길', desc:'덕이 높고 주변의 신망이 두터운 격'},
+          jeong: {num:21, name:'두령격(頭領格)', luck:'길',   desc:'리더십이 강한 격'},
+        },
+        hanjaOptions: [
+          {syllable:'나', options:[
+            {hanja:'娜', meaning:'예쁠 나',   strokes:10, ohaeng:'토(土)'},
+            {hanja:'那', meaning:'어찌 나',   strokes:7,  ohaeng:'화(火)'},
+            {hanja:'羅', meaning:'벌일 나',   strokes:19, ohaeng:'화(火)'},
+            {hanja:'奈', meaning:'어찌 나',   strokes:8,  ohaeng:'화(火)'},
+          ]},
+          {syllable:'은', options:[
+            {hanja:'恩', meaning:'은혜 은',   strokes:10, ohaeng:'수(水)'},
+            {hanja:'銀', meaning:'은 은',     strokes:14, ohaeng:'금(金)'},
+            {hanja:'垠', meaning:'끝 은',     strokes:9,  ohaeng:'토(土)'},
+            {hanja:'誾', meaning:'화할 은',   strokes:15, ohaeng:'금(金)'},
+          ]},
+        ],
+        desc:'형격·이격 공명격·덕망격으로 사회에서 덕망 높은 인물이 될 이름입니다. 금(金)·목(木) 기운을 수리오행에서 보완하여 밝고 명랑하면서도 주변을 이끄는 리더형 아이로 자랄 것입니다.'
+      }
     ];
 
-    const neutralNames = [
-      { kor: s.lastName+'지아', han: '知雅 (지아)', tags: ['목(木)','수(水)'],
-        desc: '知(알 지)는 목(木)의 성장하는 기운으로 지식과 호기심을 상징하고, 雅(우아할 아)는 수(水)의 고요함으로 깊이 있는 통찰력을 더합니다.' },
-      { kor: s.lastName+'도아', han: '道雅 (도아)', tags: ['토(土)','금(金)'],
-        desc: '道(길 도)는 토(土)의 대지 기운으로 흔들림 없는 심성을 다지고, 雅(우아할 아)는 금(金)의 맑은 기운으로 단정하고 빛나는 품성을 더합니다.' },
-      { kor: s.lastName+'리안', han: '利安 (리안)', tags: ['화(火)','수(水)'],
-        desc: '利(이로울 리)는 화(火)의 역동적 에너지로 추진력을 강화하고, 安(편안할 안)은 수(水)의 평온함으로 내면의 안정을 가져옵니다.' }
-    ];
-
-    const names = isGirl ? girlNames : isBoy ? boyNames : neutralNames;
-    const summaries = {
-      '남아': `${s.birthDate} 생 남아의 사주를 분석한 결과, 목(木)과 수(水)의 기운이 다소 부족합니다. 금(金)과 화(火)가 강해 창의성·열정은 넘치나, 차분함과 유연성을 보완하는 이름이 사주의 균형을 잡아줄 것입니다.`,
-      '여아': `${s.birthDate} 생 여아의 사주를 분석한 결과, 수(水)와 금(金)의 기운을 강화하면 좋을 운명 구조입니다. 현재 토(土)·화(火)가 강하므로 섬세함과 지혜를 상징하는 이름이 조화로운 미래를 열어줄 것입니다.`,
-      '미정': `${s.birthDate}의 사주 분석 결과, 화(火)·토(土) 기운이 다소 과해 목(木)·수(水)·금(金) 기운 보완이 필요합니다. 균형 잡힌 기운의 이름이 건강하고 풍요로운 삶을 이끌어 줄 것입니다.`
-    };
-
-    return { summary: summaries[s.gender] || summaries['미정'], names };
+    const names = isGirl ? girlNames : boyNames;
+    return { sajuOhaeng, missingElements, summary, names };
   }
 
-  /* ──────────────────────────────────────────────────────────────
-   * 결과 렌더링
-   * ────────────────────────────────────────────────────────────── */
-  const TAG_CLASS  = { '목(木)':'tag-wood','수(水)':'tag-water','화(火)':'tag-fire','토(土)':'tag-earth','금(金)':'tag-metal' };
+  /* ── 렌더링 ── */
+  const OHAENG_COLOR = {
+    wood:'wood-color', fire:'fire-color', earth:'earth-color', metal:'metal-color', water:'water-color'
+  };
+  const OHAENG_KOR = {wood:'목(木)', fire:'화(火)', earth:'토(土)', metal:'금(金)', water:'수(水)'};
+  const TAG_CLASS  = {'목(木)':'tag-wood','수(水)':'tag-water','화(火)':'tag-fire','토(土)':'tag-earth','금(金)':'tag-metal'};
   const RANK_LABEL = ['🥇 1위 추천','🥈 2위 추천','🥉 3위 추천'];
+  const SCORE_COLOR= ['#7ec8e3','#f7a8c0','#b5d5a8'];
+  const CIRCUMFERENCE = 2 * Math.PI * 20; // r=20
 
   function renderResult(data) {
-    document.getElementById('saju-summary').textContent = data.summary;
-    document.getElementById('name-list').innerHTML = data.names.map((n, i) => `
-      <div class="name-card">
-        <div class="name-rank">${RANK_LABEL[i]}</div>
-        <div class="name-row">
-          <span class="name-kor">${n.kor}</span>
-          <span class="name-han">${n.han}</span>
-        </div>
-        <div class="name-ohaeng">
-          ${n.tags.map(t => `<span class="tag ${TAG_CLASS[t]||''}">${t}</span>`).join('')}
-        </div>
-        <div class="name-desc">${n.desc}</div>
-      </div>`).join('');
+    // 사주오행 분포
+    const oh = data.sajuOhaeng;
+    const total = oh.wood + oh.fire + oh.earth + oh.metal + oh.water;
+    const ohCard = document.getElementById('saju-ohaeng-card');
+    ohCard.innerHTML = `
+      <div class="saju-card-title">📊 사주오행 분포 분석</div>
+      <div class="saju-summary-text">${data.summary}</div>
+      <div class="ohaeng-bars">
+        ${[['wood','목(木)'],['fire','화(火)'],['earth','토(土)'],['metal','금(金)'],['water','수(水)']].map(([k,label])=>{
+          const pct = Math.round(oh[k]/total*100);
+          return `<div class="ohaeng-row">
+            <span class="ohaeng-label ${OHAENG_COLOR[k]}">${label}</span>
+            <div class="ohaeng-track"><div class="ohaeng-fill ${OHAENG_COLOR[k]}" style="width:${pct}%"></div></div>
+            <span class="ohaeng-pct">${pct}%</span>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="missing-tags">
+        <span style="font-size:0.7rem;color:#888;align-self:center">보완 필요:</span>
+        ${data.missingElements.map(e=>`<span class="missing-tag">⚠️ ${e} 부족</span>`).join('')}
+      </div>`;
+
+    // 이름 카드
+    const scoreLabels = {baleumOhaeng:'발음오행',baleumEumyang:'발음음양',sagekSuri:'사격수리',suriOhaeng:'수리오행',suriEumyang:'수리음양',sajuComplement:'사주보완'};
+    document.getElementById('name-list').innerHTML = data.names.map((n, i) => {
+      const offset = CIRCUMFERENCE * (1 - n.totalScore / 100);
+      const ringColor = SCORE_COLOR[i];
+
+      const scoreItems = Object.entries(n.scores).map(([k,v])=>`
+        <div class="score-item">
+          <div class="score-item-label">${scoreLabels[k]||k}</div>
+          <div class="score-item-bar"><div class="score-item-fill" style="width:${v}%;background:${ringColor}"></div></div>
+          <div class="score-item-val">${v}점</div>
+        </div>`).join('');
+
+      const syllableChips = n.syllables.map(sy=>`
+        <div class="syllable-chip">
+          <div class="syllable-kor">${sy.kor}</div>
+          <div class="syllable-meta">발음: <span class="${TAG_CLASS[sy.baleumOhaeng]||''}" style="font-weight:700">${sy.baleumOhaeng}</span></div>
+          <div class="syllable-meta">${sy.eumyang}</div>
+          <div class="syllable-meta">수리: ${sy.suriOhaeng}</div>
+          <div class="syllable-meta">${sy.suriEumyang}</div>
+        </div>`).join('');
+
+      const sagekItems = Object.entries(n.sagek).map(([k,v])=>`
+        <div class="sagek-item">
+          <div class="sagek-name">${{won:'원격(元格)',hyeong:'형격(亨格)',i:'이격(利格)',jeong:'정격(貞格)'}[k]}</div>
+          <div class="sagek-num">${v.num}</div>
+          <span class="sagek-luck luck-${v.luck}">${v.luck}</span>
+          <div style="font-size:0.68rem;font-weight:600;color:#666;margin-bottom:3px">${v.name}</div>
+          <div class="sagek-desc">${v.desc}</div>
+        </div>`).join('');
+
+      const hanjaGroups = n.hanjaOptions.map(g=>`
+        <div class="hanja-syllable-group">
+          <div class="hanja-syllable-title">'${g.syllable}' 추천 한자</div>
+          <div class="hanja-options">
+            ${g.options.map((h,hi)=>`
+              <div class="hanja-chip${hi===0?' selected':''}" onclick="selectHanja(this)">
+                <div class="hanja-char">${h.hanja}</div>
+                <div class="hanja-mean">${h.meaning}</div>
+                <div class="hanja-strokes">${h.strokes}획</div>
+                <div class="hanja-oh ${TAG_CLASS[h.ohaeng]||''}">${h.ohaeng}</div>
+              </div>`).join('')}
+          </div>
+        </div>`).join('');
+
+      return `
+        <div class="name-card">
+          <div class="name-card-header">
+            <div class="name-rank">${RANK_LABEL[i]}</div>
+            <div class="name-top-row">
+              <div class="name-kor">${n.kor}</div>
+              <div class="score-ring">
+                <svg width="52" height="52" viewBox="0 0 44 44">
+                  <circle class="score-ring-bg" cx="22" cy="22" r="20"/>
+                  <circle class="score-ring-fill" cx="22" cy="22" r="20"
+                    stroke="${ringColor}"
+                    stroke-dasharray="${CIRCUMFERENCE}"
+                    stroke-dashoffset="${offset}"/>
+                </svg>
+                <div class="score-ring-text">
+                  <span class="score-num">${n.totalScore}</span>
+                  <span class="score-label">총점</span>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:0.8rem;color:#666;line-height:1.6">${n.desc}</div>
+          </div>
+
+          <!-- 항목별 점수 -->
+          <div class="score-grid">${scoreItems}</div>
+
+          <!-- 상세 펼치기 -->
+          <button class="detail-toggle" onclick="toggleDetail(this)">▸ 발음오행·사격수리·한자 상세 보기</button>
+          <div class="detail-body">
+            <div class="analysis-section" style="padding-top:14px">
+              <div class="analysis-label">발음오행 · 발음음양 · 수리오행</div>
+              <div class="syllable-row">${syllableChips}</div>
+              <div class="analysis-label">사격수리 (원형이정격)</div>
+              <div class="sagek-grid">${sagekItems}</div>
+            </div>
+            <div class="hanja-section">
+              <div class="analysis-label" style="margin-bottom:10px">추천 한자 선택</div>
+              ${hanjaGroups}
+            </div>
+          </div>
+        </div>`;
+    }).join('');
   }
 
-  /* ──────────────────────────────────────────────────────────────
-   * 초기화
-   * ────────────────────────────────────────────────────────────── */
+  function toggleDetail(btn) {
+    const body = btn.nextElementSibling;
+    const open = body.classList.toggle('open');
+    btn.textContent = open ? '▾ 접기' : '▸ 발음오행·사격수리·한자 상세 보기';
+  }
+
+  function selectHanja(chip) {
+    chip.closest('.hanja-options').querySelectorAll('.hanja-chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+  }
+
+  /* ── 추가 이름 로딩 및 렌더링 ── */
+  function showMoreNamesLoading() {
+    // 결과 화면은 유지한 채 로딩 오버레이 대신 버튼 상태로 처리
+    const btn = document.getElementById('btn-more-names');
+    btn.disabled = true;
+    btn.textContent = '⏳ 추가 이름 분석 중...';
+    btn.style.opacity = '0.6';
+
+    /* ── 실제 AI API 연동 지점 (추가 이름) ──────────────────
+     * TODO: 아래 setTimeout을 실제 API 호출로 교체하세요.
+     * state 변수에 사용자 정보가 그대로 있으므로 buildPrompt(state) 재활용 가능.
+     * 프롬프트에 "앞서 추천한 이름과 다른 3개를 추천해 달라"는 조건 추가 권장.
+     * ────────────────────────────────────────────────────── */
+    setTimeout(() => {
+      moreCount++;
+      const extraData = getExtraMockResult(state, moreCount);
+      appendExtraNames(extraData, moreCount);
+      showScreen('screen-result');
+
+      // 남은 횟수에 따라 버튼 업데이트
+      const area = document.getElementById('extra-name-area');
+      area.style.display = 'block';
+      if (moreCount >= MAX_MORE) {
+        btn.style.display = 'none';
+      } else {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        const remaining = MAX_MORE - moreCount;
+        btn.textContent = `🎁 광고 보고 이름 3개 더 받기 (${remaining}회 남음)`;
+      }
+      // 새로 추가된 이름 영역으로 스크롤
+      const newBlock = document.getElementById(`extra-block-${moreCount}`);
+      if (newBlock) newBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 2000);
+  }
+
+  function appendExtraNames(names, round) {
+    const startRank = round * 3 + 1; // 4, 7, 10
+    const extraColors = ['#c3a8e3','#a8c8e3','#e3c8a8'];
+    const dividerEl = document.createElement('div');
+    dividerEl.id = `extra-block-${round}`;
+    dividerEl.innerHTML = `<div class="more-names-divider"><span>✨ 추가 추천 이름 (${round}차)</span></div>`;
+    const container = document.createElement('div');
+    container.innerHTML = renderExtraNameCards(names, startRank, extraColors);
+    dividerEl.appendChild(container);
+    document.getElementById('extra-name-list').appendChild(dividerEl);
+  }
+
+  function renderExtraNameCards(names, startRank, extraColors) {
+    const scoreLabels = {baleumOhaeng:'발음오행',baleumEumyang:'발음음양',sagekSuri:'사격수리',suriOhaeng:'수리오행',suriEumyang:'수리음양',sajuComplement:'사주보완'};
+    return names.map((n, i) => {
+      const color  = extraColors[i % extraColors.length];
+      const offset = CIRCUMFERENCE * (1 - n.totalScore / 100);
+      const scoreItems = Object.entries(n.scores).map(([k,v])=>`
+        <div class="score-item">
+          <div class="score-item-label">${scoreLabels[k]||k}</div>
+          <div class="score-item-bar"><div class="score-item-fill" style="width:${v}%;background:${color}"></div></div>
+          <div class="score-item-val">${v}점</div>
+        </div>`).join('');
+      const syllableChips = n.syllables.map(sy=>`
+        <div class="syllable-chip">
+          <div class="syllable-kor">${sy.kor}</div>
+          <div class="syllable-meta">발음: <span class="${TAG_CLASS[sy.baleumOhaeng]||''}" style="font-weight:700">${sy.baleumOhaeng}</span></div>
+          <div class="syllable-meta">${sy.eumyang}</div>
+          <div class="syllable-meta">수리: ${sy.suriOhaeng}</div>
+          <div class="syllable-meta">${sy.suriEumyang}</div>
+        </div>`).join('');
+      const sagekItems = Object.entries(n.sagek).map(([k,v])=>`
+        <div class="sagek-item">
+          <div class="sagek-name">${{won:'원격(元格)',hyeong:'형격(亨格)',i:'이격(利格)',jeong:'정격(貞格)'}[k]}</div>
+          <div class="sagek-num">${v.num}</div>
+          <span class="sagek-luck luck-${v.luck}">${v.luck}</span>
+          <div style="font-size:0.68rem;font-weight:600;color:#666;margin-bottom:3px">${v.name}</div>
+          <div class="sagek-desc">${v.desc}</div>
+        </div>`).join('');
+      const hanjaGroups = n.hanjaOptions.map(g=>`
+        <div class="hanja-syllable-group">
+          <div class="hanja-syllable-title">'${g.syllable}' 추천 한자</div>
+          <div class="hanja-options">
+            ${g.options.map((h,hi)=>`
+              <div class="hanja-chip${hi===0?' selected':''}" onclick="selectHanja(this)">
+                <div class="hanja-char">${h.hanja}</div>
+                <div class="hanja-mean">${h.meaning}</div>
+                <div class="hanja-strokes">${h.strokes}획</div>
+                <div class="hanja-oh ${TAG_CLASS[h.ohaeng]||''}">${h.ohaeng}</div>
+              </div>`).join('')}
+          </div>
+        </div>`).join('');
+      return `
+        <div class="name-card extra">
+          <div class="name-card-header">
+            <div class="name-rank">✦ ${startRank + i}위 추천</div>
+            <div class="name-top-row">
+              <div class="name-kor">${n.kor}</div>
+              <div class="score-ring">
+                <svg width="52" height="52" viewBox="0 0 44 44">
+                  <circle class="score-ring-bg" cx="22" cy="22" r="20"/>
+                  <circle class="score-ring-fill" cx="22" cy="22" r="20"
+                    stroke="${color}" stroke-dasharray="${CIRCUMFERENCE}" stroke-dashoffset="${offset}"/>
+                </svg>
+                <div class="score-ring-text">
+                  <span class="score-num">${n.totalScore}</span>
+                  <span class="score-label">총점</span>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:0.8rem;color:#666;line-height:1.6">${n.desc}</div>
+          </div>
+          <div class="score-grid">${scoreItems}</div>
+          <button class="detail-toggle" onclick="toggleDetail(this)">▸ 발음오행·사격수리·한자 상세 보기</button>
+          <div class="detail-body">
+            <div class="analysis-section" style="padding-top:14px">
+              <div class="analysis-label">발음오행 · 발음음양 · 수리오행</div>
+              <div class="syllable-row">${syllableChips}</div>
+              <div class="analysis-label">사격수리 (원형이정격)</div>
+              <div class="sagek-grid">${sagekItems}</div>
+            </div>
+            <div class="hanja-section">
+              <div class="analysis-label" style="margin-bottom:10px">추천 한자 선택</div>
+              ${hanjaGroups}
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  /* ── 추가 Mock 데이터 (API 연동 후 삭제) ── */
+  function getExtraMockResult(s, round) {
+    const isGirl = s.gender === '여아';
+    const all = isGirl ? girlExtraAll(s) : boyExtraAll(s);
+    return all[round - 1] || all[0];
+  }
+
+  function boyExtraAll(s) { return [boyExtra1(s), boyExtra2(s), boyExtra3(s)]; }
+  function girlExtraAll(s) { return [girlExtra1(s), girlExtra2(s), girlExtra3(s)]; }
+
+  /* ── 남아 추가 1차 ── */
+  function boyExtra1(s) { return [
+      {
+        kor: s.lastName+'지호', totalScore: 81,
+        scores:{baleumOhaeng:80,baleumEumyang:82,sagekSuri:78,suriOhaeng:82,suriEumyang:80,sajuComplement:84},
+        syllables:[
+          {kor:'지',baleumOhaeng:'금(金)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},
+          {kor:'호',baleumOhaeng:'토(土)',eumyang:'양(陽)',suriOhaeng:'화(火)',suriEumyang:'음(陰)'},
+        ],
+        sagek:{
+          won:{num:20,name:'공허격(空虛格)',luck:'평',desc:'노력과 의지로 성취하는 격, 인내심이 중요'},
+          hyeong:{num:25,name:'안강격(安康格)',luck:'길',desc:'건강하고 편안한 삶을 누리는 격'},
+          i:{num:17,name:'건창격(健暢格)',luck:'길',desc:'건강하고 활기차게 목표를 이루는 격'},
+          jeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'중년 이후 안정적인 삶을 기대할 수 있는 격'},
+        },
+        hanjaOptions:[
+          {syllable:'지',options:[
+            {hanja:'志',meaning:'뜻 지',strokes:7,ohaeng:'화(火)'},
+            {hanja:'智',meaning:'슬기 지',strokes:12,ohaeng:'수(水)'},
+            {hanja:'池',meaning:'못 지',strokes:7,ohaeng:'수(水)'},
+            {hanja:'芝',meaning:'지초 지',strokes:10,ohaeng:'목(木)'},
+          ]},
+          {syllable:'호',options:[
+            {hanja:'浩',meaning:'넓을 호',strokes:10,ohaeng:'수(水)'},
+            {hanja:'昊',meaning:'하늘 호',strokes:8,ohaeng:'화(火)'},
+            {hanja:'虎',meaning:'범 호',strokes:8,ohaeng:'금(金)'},
+            {hanja:'皓',meaning:'흴 호',strokes:12,ohaeng:'금(金)'},
+          ]},
+        ],
+        desc:'금(金)·수(水) 기운을 발음오행에서 보완합니다. 형격 안강격으로 건강하고 평온한 삶이 기대되며, 침착하고 사려 깊은 성격을 가진 아이로 자랄 이름입니다.'
+      },
+      {
+        kor: s.lastName+'민준', totalScore: 79,
+        scores:{baleumOhaeng:78,baleumEumyang:80,sagekSuri:76,suriOhaeng:80,suriEumyang:78,sajuComplement:82},
+        syllables:[
+          {kor:'민',baleumOhaeng:'수(水)',eumyang:'음(陰)',suriOhaeng:'수(水)',suriEumyang:'음(陰)'},
+          {kor:'준',baleumOhaeng:'목(木)',eumyang:'양(陽)',suriOhaeng:'화(火)',suriEumyang:'양(陽)'},
+        ],
+        sagek:{
+          won:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지와 노력으로 전환점을 극복하는 격'},
+          hyeong:{num:19,name:'장벽격(障壁格)',luck:'평',desc:'도전을 극복하며 성장하는 격'},
+          i:{num:21,name:'두령격(頭領格)',luck:'길',desc:'리더십이 강하고 조직을 이끄는 격'},
+          jeong:{num:25,name:'안강격(安康格)',luck:'길',desc:'건강하고 편안한 삶을 누리는 격'},
+        },
+        hanjaOptions:[
+          {syllable:'민',options:[
+            {hanja:'旻',meaning:'하늘 민',strokes:8,ohaeng:'화(火)'},
+            {hanja:'敏',meaning:'민첩할 민',strokes:11,ohaeng:'금(金)'},
+            {hanja:'珉',meaning:'옥돌 민',strokes:9,ohaeng:'금(金)'},
+            {hanja:'民',meaning:'백성 민',strokes:5,ohaeng:'수(水)'},
+          ]},
+          {syllable:'준',options:[
+            {hanja:'俊',meaning:'뛰어날 준',strokes:9,ohaeng:'목(木)'},
+            {hanja:'峻',meaning:'높을 준',strokes:10,ohaeng:'토(土)'},
+            {hanja:'準',meaning:'기준 준',strokes:13,ohaeng:'수(水)'},
+            {hanja:'埈',meaning:'높을 준',strokes:10,ohaeng:'토(土)'},
+          ]},
+        ],
+        desc:'수(水)·목(木) 기운을 이중으로 보완하는 이름입니다. 이격 두령격으로 리더십이 강한 인물이 될 것이며, 총명하고 실력으로 인정받는 아이로 자랄 이름입니다.'
+      },
+      {
+        kor: s.lastName+'태양', totalScore: 76,
+        scores:{baleumOhaeng:75,baleumEumyang:77,sagekSuri:74,suriOhaeng:78,suriEumyang:76,sajuComplement:78},
+        syllables:[
+          {kor:'태',baleumOhaeng:'화(火)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},
+          {kor:'양',baleumOhaeng:'토(土)',eumyang:'양(陽)',suriOhaeng:'수(水)',suriEumyang:'음(陰)'},
+        ],
+        sagek:{
+          won:{num:18,name:'발전격(發展格)',luck:'길',desc:'꾸준한 발전과 성장이 기대되는 격'},
+          hyeong:{num:24,name:'입신격(立身格)',luck:'대길',desc:'자수성가하여 이름을 크게 세우는 격'},
+          i:{num:19,name:'장벽격(障壁格)',luck:'평',desc:'노력으로 장애를 극복하는 격'},
+          jeong:{num:26,name:'변화격(變化格)',luck:'평',desc:'변화가 많으나 적응력이 뛰어난 격'},
+        },
+        hanjaOptions:[
+          {syllable:'태',options:[
+            {hanja:'泰',meaning:'클 태',strokes:10,ohaeng:'수(水)'},
+            {hanja:'太',meaning:'클 태',strokes:4,ohaeng:'화(火)'},
+            {hanja:'兌',meaning:'기쁠 태',strokes:7,ohaeng:'금(金)'},
+            {hanja:'台',meaning:'별 태',strokes:5,ohaeng:'토(土)'},
+          ]},
+          {syllable:'양',options:[
+            {hanja:'洋',meaning:'바다 양',strokes:9,ohaeng:'수(水)'},
+            {hanja:'陽',meaning:'햇빛 양',strokes:12,ohaeng:'화(火)'},
+            {hanja:'楊',meaning:'버들 양',strokes:13,ohaeng:'목(木)'},
+            {hanja:'瑒',meaning:'옥 양',strokes:13,ohaeng:'금(金)'},
+          ]},
+        ],
+        desc:'형격 입신격 대길로 자수성가하여 크게 이름을 떨칠 이름입니다. 목(木)·수(水) 기운을 수리오행에서 보완하여 밝고 활기차며 강한 추진력을 가진 아이로 성장합니다.'
+      }
+    ];
+
+    const girlExtra = [
+      {
+        kor: s.lastName+'유나', totalScore: 83,
+        scores:{baleumOhaeng:82,baleumEumyang:84,sagekSuri:80,suriOhaeng:85,suriEumyang:83,sajuComplement:86},
+        syllables:[
+          {kor:'유',baleumOhaeng:'수(水)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},
+          {kor:'나',baleumOhaeng:'화(火)',eumyang:'양(陽)',suriOhaeng:'수(水)',suriEumyang:'음(陰)'},
+        ],
+        sagek:{
+          won:{num:21,name:'두령격(頭領格)',luck:'길',desc:'리더십이 강하고 자립심이 있는 격'},
+          hyeong:{num:15,name:'복수격(福壽格)',luck:'대길',desc:'복과 수명이 길고 풍요로운 삶을 누리는 격'},
+          i:{num:14,name:'산재격(散財格)',luck:'평',desc:'재물 관리에 주의하면 풍요로운 삶 가능'},
+          jeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지로 전환점을 극복하는 격'},
+        },
+        hanjaOptions:[
+          {syllable:'유',options:[
+            {hanja:'侑',meaning:'권할 유',strokes:8,ohaeng:'화(火)'},
+            {hanja:'柔',meaning:'부드러울 유',strokes:9,ohaeng:'목(木)'},
+            {hanja:'惟',meaning:'생각할 유',strokes:11,ohaeng:'화(火)'},
+            {hanja:'宥',meaning:'용서할 유',strokes:9,ohaeng:'토(土)'},
+          ]},
+          {syllable:'나',options:[
+            {hanja:'娜',meaning:'예쁠 나',strokes:10,ohaeng:'토(土)'},
+            {hanja:'那',meaning:'어찌 나',strokes:7,ohaeng:'화(火)'},
+            {hanja:'奈',meaning:'어찌 나',strokes:8,ohaeng:'화(火)'},
+            {hanja:'羅',meaning:'벌일 나',strokes:19,ohaeng:'화(火)'},
+          ]},
+        ],
+        desc:'형격 복수격 대길로 복과 건강이 풍성한 이름입니다. 수(水)·목(木) 기운을 두루 보완하여 친화력 있고 사랑받는 여성으로 성장할 이름입니다.'
+      },
+      {
+        kor: s.lastName+'채원', totalScore: 80,
+        scores:{baleumOhaeng:79,baleumEumyang:81,sagekSuri:78,suriOhaeng:81,suriEumyang:80,sajuComplement:82},
+        syllables:[
+          {kor:'채',baleumOhaeng:'금(金)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},
+          {kor:'원',baleumOhaeng:'수(水)',eumyang:'음(陰)',suriOhaeng:'금(金)',suriEumyang:'음(陰)'},
+        ],
+        sagek:{
+          won:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치고 사회적 명성을 얻는 격'},
+          hyeong:{num:17,name:'건창격(健暢格)',luck:'길',desc:'건강하고 활기차게 목표를 이루는 격'},
+          i:{num:15,name:'복수격(福壽格)',luck:'대길',desc:'복과 수명이 길고 풍요로운 삶을 누리는 격'},
+          jeong:{num:24,name:'입신격(立身格)',luck:'길',desc:'자수성가하여 이름을 세우는 격'},
+        },
+        hanjaOptions:[
+          {syllable:'채',options:[
+            {hanja:'彩',meaning:'빛날 채',strokes:11,ohaeng:'화(火)'},
+            {hanja:'采',meaning:'캘 채',strokes:8,ohaeng:'목(木)'},
+            {hanja:'埰',meaning:'채지 채',strokes:11,ohaeng:'토(土)'},
+            {hanja:'菜',meaning:'나물 채',strokes:14,ohaeng:'목(木)'},
+          ]},
+          {syllable:'원',options:[
+            {hanja:'苑',meaning:'동산 원',strokes:11,ohaeng:'목(木)'},
+            {hanja:'媛',meaning:'예쁠 원',strokes:12,ohaeng:'토(土)'},
+            {hanja:'圓',meaning:'둥글 원',strokes:13,ohaeng:'토(土)'},
+            {hanja:'元',meaning:'으뜸 원',strokes:4,ohaeng:'목(木)'},
+          ]},
+        ],
+        desc:'원격·이격 모두 길격 이상으로 안정적인 삶이 기대됩니다. 금(金)·목(木) 부족 기운을 발음오행·수리오행에서 균형 있게 보완하는 이름입니다.'
+      },
+      {
+        kor: s.lastName+'지수', totalScore: 77,
+        scores:{baleumOhaeng:76,baleumEumyang:78,sagekSuri:75,suriOhaeng:78,suriEumyang:77,sajuComplement:79},
+        syllables:[
+          {kor:'지',baleumOhaeng:'금(金)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},
+          {kor:'수',baleumOhaeng:'수(水)',eumyang:'음(陰)',suriOhaeng:'수(水)',suriEumyang:'음(陰)'},
+        ],
+        sagek:{
+          won:{num:16,name:'덕망격(德望格)',luck:'대길',desc:'덕이 높고 주변의 신망이 두터운 격'},
+          hyeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지와 노력으로 전환점을 극복하는 격'},
+          i:{num:17,name:'건창격(健暢格)',luck:'길',desc:'건강하고 활기차게 목표를 이루는 격'},
+          jeong:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치는 격'},
+        },
+        hanjaOptions:[
+          {syllable:'지',options:[
+            {hanja:'智',meaning:'슬기 지',strokes:12,ohaeng:'수(水)'},
+            {hanja:'志',meaning:'뜻 지',strokes:7,ohaeng:'화(火)'},
+            {hanja:'芝',meaning:'지초 지',strokes:10,ohaeng:'목(木)'},
+            {hanja:'池',meaning:'못 지',strokes:7,ohaeng:'수(水)'},
+          ]},
+          {syllable:'수',options:[
+            {hanja:'秀',meaning:'빼어날 수',strokes:7,ohaeng:'금(金)'},
+            {hanja:'水',meaning:'물 수',strokes:4,ohaeng:'수(水)'},
+            {hanja:'粹',meaning:'순수할 수',strokes:14,ohaeng:'금(金)'},
+            {hanja:'穗',meaning:'이삭 수',strokes:17,ohaeng:'목(木)'},
+          ]},
+        ],
+        desc:'원격·정격 대길로 덕망 높고 사회적으로 이름을 떨칠 이름입니다. 금(金)·수(水) 기운이 발음오행·수리오행 모두에서 부족한 사주를 채워주는 이름입니다.'
+      }
+  ]; }
+
+  /* ── 남아 추가 2차 ── */
+  function boyExtra2(s) { return [
+    { kor:s.lastName+'현우', totalScore:80,
+      scores:{baleumOhaeng:79,baleumEumyang:81,sagekSuri:78,suriOhaeng:82,suriEumyang:80,sajuComplement:81},
+      syllables:[{kor:'현',baleumOhaeng:'토(土)',eumyang:'음(陰)',suriOhaeng:'수(水)',suriEumyang:'음(陰)'},{kor:'우',baleumOhaeng:'수(水)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'}],
+      sagek:{won:{num:24,name:'입신격(立身格)',luck:'대길',desc:'자수성가하여 이름을 크게 세우는 격'},hyeong:{num:20,name:'공허격(空虛格)',luck:'평',desc:'노력과 의지로 성취하는 격'},i:{num:19,name:'장벽격(障壁格)',luck:'평',desc:'도전을 극복하며 성장하는 격'},jeong:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치는 격'}},
+      hanjaOptions:[{syllable:'현',options:[{hanja:'玄',meaning:'검을 현',strokes:5,ohaeng:'수(水)'},{hanja:'賢',meaning:'어질 현',strokes:15,ohaeng:'금(金)'},{hanja:'炫',meaning:'빛날 현',strokes:9,ohaeng:'화(火)'},{hanja:'晛',meaning:'볕 현',strokes:11,ohaeng:'화(火)'}]},{syllable:'우',options:[{hanja:'宇',meaning:'집 우',strokes:6,ohaeng:'토(土)'},{hanja:'佑',meaning:'도울 우',strokes:7,ohaeng:'화(火)'},{hanja:'禹',meaning:'임금 우',strokes:9,ohaeng:'토(土)'},{hanja:'雨',meaning:'비 우',strokes:8,ohaeng:'수(水)'}]}],
+      desc:'원격·정격 대길로 사회적으로 크게 이름을 떨칠 이름입니다. 수(水)·목(木) 기운을 발음·수리오행 모두에서 보완하여 지혜롭고 포용력 있는 아이로 자랍니다.' },
+    { kor:s.lastName+'이준', totalScore:78,
+      scores:{baleumOhaeng:77,baleumEumyang:79,sagekSuri:76,suriOhaeng:79,suriEumyang:78,sajuComplement:80},
+      syllables:[{kor:'이',baleumOhaeng:'토(土)',eumyang:'음(陰)',suriOhaeng:'화(火)',suriEumyang:'양(陽)'},{kor:'준',baleumOhaeng:'목(木)',eumyang:'양(陽)',suriOhaeng:'수(水)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:19,name:'장벽격(障壁格)',luck:'평',desc:'노력으로 장애를 극복하는 격'},hyeong:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치는 격'},i:{num:18,name:'발전격(發展格)',luck:'길',desc:'꾸준한 발전과 성장이 기대되는 격'},jeong:{num:24,name:'입신격(立身格)',luck:'길',desc:'자수성가하는 격'}},
+      hanjaOptions:[{syllable:'이',options:[{hanja:'以',meaning:'써 이',strokes:5,ohaeng:'목(木)'},{hanja:'伊',meaning:'저 이',strokes:6,ohaeng:'화(火)'},{hanja:'怡',meaning:'기쁠 이',strokes:9,ohaeng:'화(火)'},{hanja:'珥',meaning:'귀고리 이',strokes:10,ohaeng:'금(金)'}]},{syllable:'준',options:[{hanja:'俊',meaning:'뛰어날 준',strokes:9,ohaeng:'목(木)'},{hanja:'峻',meaning:'높을 준',strokes:10,ohaeng:'토(土)'},{hanja:'準',meaning:'기준 준',strokes:13,ohaeng:'수(水)'},{hanja:'埈',meaning:'높을 준',strokes:10,ohaeng:'토(土)'}]}],
+      desc:'형격 공명격 대길로 사회에서 두각을 드러낼 이름입니다. 목(木)·수(Water) 기운을 보완하여 활기차고 성실한 아이로 자랄 이름입니다.' },
+    { kor:s.lastName+'건우', totalScore:75,
+      scores:{baleumOhaeng:74,baleumEumyang:76,sagekSuri:73,suriOhaeng:76,suriEumyang:75,sajuComplement:77},
+      syllables:[{kor:'건',baleumOhaeng:'금(金)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'우',baleumOhaeng:'수(Water)',eumyang:'양(陽)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:17,name:'건창격(健暢格)',luck:'길',desc:'건강하고 활기차게 목표를 이루는 격'},hyeong:{num:21,name:'두령격(頭領格)',luck:'길',desc:'리더십이 강한 격'},i:{num:16,name:'덕망격(德望格)',luck:'대길',desc:'덕이 높고 신망이 두터운 격'},jeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지로 전환점을 극복하는 격'}},
+      hanjaOptions:[{syllable:'건',options:[{hanja:'建',meaning:'세울 건',strokes:9,ohaeng:'목(木)'},{hanja:'乾',meaning:'하늘 건',strokes:11,ohaeng:'금(金)'},{hanja:'健',meaning:'굳셀 건',strokes:11,ohaeng:'금(金)'},{hanja:'虔',meaning:'공경할 건',strokes:10,ohaeng:'화(火)'}]},{syllable:'우',options:[{hanja:'宇',meaning:'집 우',strokes:6,ohaeng:'토(土)'},{hanja:'佑',meaning:'도울 우',strokes:7,ohaeng:'화(火)'},{hanja:'禹',meaning:'임금 우',strokes:9,ohaeng:'토(土)'},{hanja:'雨',meaning:'비 우',strokes:8,ohaeng:'수(Water)'}]}],
+      desc:'이격 덕망격 대길로 덕망 높은 인물이 될 이름입니다. 금(金)·수(Water)·목(木) 기운을 고루 보완하여 강인하고 믿음직한 아이로 성장합니다.' }
+  ]; }
+
+  /* ── 남아 추가 3차 ── */
+  function boyExtra3(s) { return [
+    { kor:s.lastName+'승원', totalScore:78,
+      scores:{baleumOhaeng:77,baleumEumyang:79,sagekSuri:76,suriOhaeng:80,suriEumyang:77,sajuComplement:79},
+      syllables:[{kor:'승',baleumOhaeng:'금(金)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'원',baleumOhaeng:'수(Water)',eumyang:'음(陰)',suriOhaeng:'금(金)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:21,name:'두령격(頭領格)',luck:'길',desc:'리더십이 강하고 조직을 이끄는 격'},hyeong:{num:25,name:'안강격(安康格)',luck:'길',desc:'건강하고 편안한 삶을 누리는 격'},i:{num:20,name:'공허격(空虛格)',luck:'평',desc:'노력으로 성취하는 격'},jeong:{num:24,name:'입신격(立身格)',luck:'길',desc:'자수성가하는 격'}},
+      hanjaOptions:[{syllable:'승',options:[{hanja:'承',meaning:'이을 승',strokes:8,ohaeng:'수(Water)'},{hanja:'昇',meaning:'오를 승',strokes:8,ohaeng:'화(火)'},{hanja:'勝',meaning:'이길 승',strokes:12,ohaeng:'화(火)'},{hanja:'丞',meaning:'도울 승',strokes:6,ohaeng:'수(Water)'}]},{syllable:'원',options:[{hanja:'源',meaning:'근원 원',strokes:13,ohaeng:'수(Water)'},{hanja:'遠',meaning:'멀 원',strokes:14,ohaeng:'수(Water)'},{hanja:'元',meaning:'으뜸 원',strokes:4,ohaeng:'목(木)'},{hanja:'苑',meaning:'동산 원',strokes:11,ohaeng:'목(木)'}]}],
+      desc:'금(金)·수(Water) 기운을 발음·수리오행 모두에서 보완합니다. 안강격으로 건강하고 안정된 삶이 기대되며, 침착하고 믿음직스러운 아이로 자랄 이름입니다.' },
+    { kor:s.lastName+'재혁', totalScore:76,
+      scores:{baleumOhaeng:75,baleumEumyang:77,sagekSuri:74,suriOhaeng:78,suriEumyang:75,sajuComplement:77},
+      syllables:[{kor:'재',baleumOhaeng:'금(金)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'혁',baleumOhaeng:'토(土)',eumyang:'음(陰)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:16,name:'덕망격(德望格)',luck:'대길',desc:'덕이 높고 신망이 두터운 격'},hyeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지로 전환점을 극복하는 격'},i:{num:21,name:'두령격(頭領格)',luck:'길',desc:'리더십이 강한 격'},jeong:{num:25,name:'안강격(安康格)',luck:'길',desc:'건강하고 편안한 삶을 누리는 격'}},
+      hanjaOptions:[{syllable:'재',options:[{hanja:'載',meaning:'실을 재',strokes:13,ohaeng:'토(土)'},{hanja:'在',meaning:'있을 재',strokes:6,ohaeng:'토(土)'},{hanja:'才',meaning:'재주 재',strokes:4,ohaeng:'목(木)'},{hanja:'梓',meaning:'가래나무 재',strokes:11,ohaeng:'목(木)'}]},{syllable:'혁',options:[{hanja:'赫',meaning:'빛날 혁',strokes:14,ohaeng:'화(火)'},{hanja:'爀',meaning:'빛날 혁',strokes:20,ohaeng:'화(火)'},{hanja:'奕',meaning:'클 혁',strokes:9,ohaeng:'화(火)'},{hanja:'焃',meaning:'빛날 혁',strokes:11,ohaeng:'화(火)'}]}],
+      desc:'원격 덕망격 대길로 덕망 있는 인물이 될 이름입니다. 금(金)·목(木)·수(Water) 기운을 골고루 보완하여 재능 있고 빛나는 아이로 자랄 이름입니다.' },
+    { kor:s.lastName+'지환', totalScore:74,
+      scores:{baleumOhaeng:73,baleumEumyang:75,sagekSuri:72,suriOhaeng:76,suriEumyang:74,sajuComplement:75},
+      syllables:[{kor:'지',baleumOhaeng:'금(金)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'환',baleumOhaeng:'토(土)',eumyang:'양(陽)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:18,name:'발전격(發展格)',luck:'길',desc:'꾸준한 발전과 성장이 기대되는 격'},hyeong:{num:24,name:'입신격(立身格)',luck:'대길',desc:'자수성가하여 이름을 세우는 격'},i:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지로 전환점을 극복하는 격'},jeong:{num:26,name:'변화격(變化格)',luck:'평',desc:'적응력이 뛰어난 격'}},
+      hanjaOptions:[{syllable:'지',options:[{hanja:'智',meaning:'슬기 지',strokes:12,ohaeng:'수(Water)'},{hanja:'志',meaning:'뜻 지',strokes:7,ohaeng:'화(火)'},{hanja:'芝',meaning:'지초 지',strokes:10,ohaeng:'목(木)'},{hanja:'池',meaning:'못 지',strokes:7,ohaeng:'수(Water)'}]},{syllable:'환',options:[{hanja:'煥',meaning:'빛날 환',strokes:13,ohaeng:'화(火)'},{hanja:'桓',meaning:'굳셀 환',strokes:10,ohaeng:'목(木)'},{hanja:'渙',meaning:'흩어질 환',strokes:12,ohaeng:'수(Water)'},{hanja:'奐',meaning:'빛날 환',strokes:9,ohaeng:'토(土)'}]}],
+      desc:'형격 입신격 대길로 자수성가하여 이름을 세울 이름입니다. 금(金)·수(Water) 기운을 보완하여 지혜롭고 환경에 잘 적응하는 아이로 성장합니다.' }
+  ]; }
+
+  /* ── 여아 추가 1차 ── */
+  function girlExtra1(s) { return [
+    { kor:s.lastName+'유나', totalScore:83,
+      scores:{baleumOhaeng:82,baleumEumyang:84,sagekSuri:80,suriOhaeng:85,suriEumyang:83,sajuComplement:86},
+      syllables:[{kor:'유',baleumOhaeng:'수(Water)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'나',baleumOhaeng:'화(火)',eumyang:'양(陽)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:21,name:'두령격(頭領格)',luck:'길',desc:'리더십이 강하고 자립심이 있는 격'},hyeong:{num:15,name:'복수격(福壽格)',luck:'대길',desc:'복과 수명이 길고 풍요로운 삶을 누리는 격'},i:{num:14,name:'산재격(散財格)',luck:'평',desc:'재물 관리에 주의하면 풍요로운 삶 가능'},jeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지로 전환점을 극복하는 격'}},
+      hanjaOptions:[{syllable:'유',options:[{hanja:'侑',meaning:'권할 유',strokes:8,ohaeng:'화(火)'},{hanja:'柔',meaning:'부드러울 유',strokes:9,ohaeng:'목(木)'},{hanja:'惟',meaning:'생각할 유',strokes:11,ohaeng:'화(火)'},{hanja:'宥',meaning:'용서할 유',strokes:9,ohaeng:'토(土)'}]},{syllable:'나',options:[{hanja:'娜',meaning:'예쁠 나',strokes:10,ohaeng:'토(土)'},{hanja:'那',meaning:'어찌 나',strokes:7,ohaeng:'화(火)'},{hanja:'奈',meaning:'어찌 나',strokes:8,ohaeng:'화(火)'},{hanja:'羅',meaning:'벌일 나',strokes:19,ohaeng:'화(火)'}]}],
+      desc:'형격 복수격 대길로 복과 건강이 풍성한 이름입니다. 수(Water)·목(木) 기운을 두루 보완하여 친화력 있고 사랑받는 여성으로 성장할 이름입니다.' },
+    { kor:s.lastName+'채원', totalScore:80,
+      scores:{baleumOhaeng:79,baleumEumyang:81,sagekSuri:78,suriOhaeng:81,suriEumyang:80,sajuComplement:82},
+      syllables:[{kor:'채',baleumOhaeng:'금(金)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'원',baleumOhaeng:'수(Water)',eumyang:'음(陰)',suriOhaeng:'금(金)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치고 사회적 명성을 얻는 격'},hyeong:{num:17,name:'건창격(健暢格)',luck:'길',desc:'건강하고 활기차게 목표를 이루는 격'},i:{num:15,name:'복수격(福壽格)',luck:'대길',desc:'복과 수명이 길고 풍요로운 삶을 누리는 격'},jeong:{num:24,name:'입신격(立身格)',luck:'길',desc:'자수성가하여 이름을 세우는 격'}},
+      hanjaOptions:[{syllable:'채',options:[{hanja:'彩',meaning:'빛날 채',strokes:11,ohaeng:'화(火)'},{hanja:'采',meaning:'캘 채',strokes:8,ohaeng:'목(木)'},{hanja:'埰',meaning:'채지 채',strokes:11,ohaeng:'토(土)'},{hanja:'菜',meaning:'나물 채',strokes:14,ohaeng:'목(木)'}]},{syllable:'원',options:[{hanja:'苑',meaning:'동산 원',strokes:11,ohaeng:'목(木)'},{hanja:'媛',meaning:'예쁠 원',strokes:12,ohaeng:'토(土)'},{hanja:'圓',meaning:'둥글 원',strokes:13,ohaeng:'토(土)'},{hanja:'元',meaning:'으뜸 원',strokes:4,ohaeng:'목(木)'}]}],
+      desc:'원격·이격 모두 길격 이상으로 안정적인 삶이 기대됩니다. 금(金)·목(木) 부족 기운을 발음오행·수리오행에서 균형 있게 보완하는 이름입니다.' },
+    { kor:s.lastName+'지수', totalScore:77,
+      scores:{baleumOhaeng:76,baleumEumyang:78,sagekSuri:75,suriOhaeng:78,suriEumyang:77,sajuComplement:79},
+      syllables:[{kor:'지',baleumOhaeng:'금(金)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'수',baleumOhaeng:'수(Water)',eumyang:'음(陰)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:16,name:'덕망격(德望格)',luck:'대길',desc:'덕이 높고 주변의 신망이 두터운 격'},hyeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지와 노력으로 전환점을 극복하는 격'},i:{num:17,name:'건창격(健暢格)',luck:'길',desc:'건강하고 활기차게 목표를 이루는 격'},jeong:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치는 격'}},
+      hanjaOptions:[{syllable:'지',options:[{hanja:'智',meaning:'슬기 지',strokes:12,ohaeng:'수(Water)'},{hanja:'志',meaning:'뜻 지',strokes:7,ohaeng:'화(火)'},{hanja:'芝',meaning:'지초 지',strokes:10,ohaeng:'목(木)'},{hanja:'池',meaning:'못 지',strokes:7,ohaeng:'수(Water)'}]},{syllable:'수',options:[{hanja:'秀',meaning:'빼어날 수',strokes:7,ohaeng:'금(金)'},{hanja:'水',meaning:'물 수',strokes:4,ohaeng:'수(Water)'},{hanja:'粹',meaning:'순수할 수',strokes:14,ohaeng:'금(金)'},{hanja:'穗',meaning:'이삭 수',strokes:17,ohaeng:'목(木)'}]}],
+      desc:'원격·정격 대길로 덕망 높고 사회적으로 이름을 떨칠 이름입니다. 금(金)·수(Water) 기운이 발음오행·수리오행 모두에서 사주를 채워주는 이름입니다.' }
+  ]; }
+
+  /* ── 여아 추가 2차 ── */
+  function girlExtra2(s) { return [
+    { kor:s.lastName+'수아', totalScore:82,
+      scores:{baleumOhaeng:81,baleumEumyang:83,sagekSuri:80,suriOhaeng:84,suriEumyang:82,sajuComplement:83},
+      syllables:[{kor:'수',baleumOhaeng:'금(金)',eumyang:'음(陰)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'},{kor:'아',baleumOhaeng:'토(土)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'}],
+      sagek:{won:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지로 전환점을 극복하는 격'},hyeong:{num:16,name:'덕망격(德望格)',luck:'대길',desc:'덕이 높고 신망이 두터운 격'},i:{num:15,name:'복수격(福壽格)',luck:'대길',desc:'복과 수명이 길고 풍요로운 삶을 누리는 격'},jeong:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치는 격'}},
+      hanjaOptions:[{syllable:'수',options:[{hanja:'秀',meaning:'빼어날 수',strokes:7,ohaeng:'금(金)'},{hanja:'粹',meaning:'순수할 수',strokes:14,ohaeng:'금(金)'},{hanja:'水',meaning:'물 수',strokes:4,ohaeng:'수(Water)'},{hanja:'穗',meaning:'이삭 수',strokes:17,ohaeng:'목(木)'}]},{syllable:'아',options:[{hanja:'雅',meaning:'우아할 아',strokes:12,ohaeng:'금(金)'},{hanja:'娥',meaning:'예쁠 아',strokes:10,ohaeng:'토(土)'},{hanja:'芽',meaning:'싹 아',strokes:8,ohaeng:'목(木)'},{hanja:'兒',meaning:'아이 아',strokes:8,ohaeng:'화(火)'}]}],
+      desc:'형격·이격·정격 모두 길격 이상으로 뛰어난 이름입니다. 금(金)·목(木) 기운을 이중으로 보완하여 총명하고 품위 있는 여성으로 성장할 이름입니다.' },
+    { kor:s.lastName+'민아', totalScore:79,
+      scores:{baleumOhaeng:78,baleumEumyang:80,sagekSuri:77,suriOhaeng:80,suriEumyang:79,sajuComplement:81},
+      syllables:[{kor:'민',baleumOhaeng:'수(Water)',eumyang:'음(陰)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'},{kor:'아',baleumOhaeng:'토(土)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'}],
+      sagek:{won:{num:20,name:'공허격(空虛格)',luck:'평',desc:'노력으로 성취하는 격'},hyeong:{num:18,name:'발전격(發展格)',luck:'길',desc:'꾸준한 발전과 성장이 기대되는 격'},i:{num:16,name:'덕망격(德望格)',luck:'대길',desc:'덕이 높고 신망이 두터운 격'},jeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지로 전환점을 극복하는 격'}},
+      hanjaOptions:[{syllable:'민',options:[{hanja:'旻',meaning:'하늘 민',strokes:8,ohaeng:'화(火)'},{hanja:'敏',meaning:'민첩할 민',strokes:11,ohaeng:'금(金)'},{hanja:'珉',meaning:'옥돌 민',strokes:9,ohaeng:'금(金)'},{hanja:'玟',meaning:'아름다운 옥 민',strokes:9,ohaeng:'금(金)'}]},{syllable:'아',options:[{hanja:'雅',meaning:'우아할 아',strokes:12,ohaeng:'금(金)'},{hanja:'娥',meaning:'예쁠 아',strokes:10,ohaeng:'토(土)'},{hanja:'芽',meaning:'싹 아',strokes:8,ohaeng:'목(木)'},{hanja:'亞',meaning:'버금 아',strokes:8,ohaeng:'토(土)'}]}],
+      desc:'이격 덕망격 대길로 덕망 있고 사랑받는 이름입니다. 수(Water)·목(木) 기운을 발음·수리오행에서 보완하여 총명하고 따뜻한 여성으로 자랄 이름입니다.' },
+    { kor:s.lastName+'예린', totalScore:76,
+      scores:{baleumOhaeng:75,baleumEumyang:77,sagekSuri:74,suriOhaeng:77,suriEumyang:76,sajuComplement:78},
+      syllables:[{kor:'예',baleumOhaeng:'토(土)',eumyang:'음(陰)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'린',baleumOhaeng:'화(火)',eumyang:'음(陰)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:19,name:'장벽격(障壁格)',luck:'평',desc:'도전을 극복하며 성장하는 격'},hyeong:{num:21,name:'두령격(頭領格)',luck:'길',desc:'리더십이 강한 격'},i:{num:18,name:'발전격(發展格)',luck:'길',desc:'꾸준한 발전이 기대되는 격'},jeong:{num:24,name:'입신격(立身格)',luck:'길',desc:'자수성가하는 격'}},
+      hanjaOptions:[{syllable:'예',options:[{hanja:'藝',meaning:'재주 예',strokes:18,ohaeng:'목(木)'},{hanja:'睿',meaning:'밝을 예',strokes:14,ohaeng:'화(火)'},{hanja:'禮',meaning:'예도 예',strokes:18,ohaeng:'화(火)'},{hanja:'叡',meaning:'슬기 예',strokes:16,ohaeng:'화(火)'}]},{syllable:'린',options:[{hanja:'璘',meaning:'옥빛 린',strokes:16,ohaeng:'금(金)'},{hanja:'麟',meaning:'기린 린',strokes:23,ohaeng:'토(土)'},{hanja:'燐',meaning:'도깨비불 린',strokes:17,ohaeng:'화(火)'},{hanja:'潾',meaning:'맑을 린',strokes:16,ohaeng:'수(Water)'}]}],
+      desc:'정격 입신격 길로 자수성가할 이름입니다. 목(木)·수(Water) 기운을 수리오행에서 보완하여 재능 있고 우아한 여성으로 자랄 이름입니다.' }
+  ]; }
+
+  /* ── 여아 추가 3차 ── */
+  function girlExtra3(s) { return [
+    { kor:s.lastName+'이서', totalScore:81,
+      scores:{baleumOhaeng:80,baleumEumyang:82,sagekSuri:79,suriOhaeng:83,suriEumyang:81,sajuComplement:82},
+      syllables:[{kor:'이',baleumOhaeng:'토(土)',eumyang:'음(陰)',suriOhaeng:'화(火)',suriEumyang:'양(陽)'},{kor:'서',baleumOhaeng:'금(金)',eumyang:'음(陰)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치는 격'},hyeong:{num:17,name:'건창격(健暢格)',luck:'길',desc:'건강하고 활기차게 목표를 이루는 격'},i:{num:16,name:'덕망격(德望格)',luck:'대길',desc:'덕이 높고 신망이 두터운 격'},jeong:{num:22,name:'중절격(中折格)',luck:'평',desc:'의지로 전환점을 극복하는 격'}},
+      hanjaOptions:[{syllable:'이',options:[{hanja:'以',meaning:'써 이',strokes:5,ohaeng:'목(木)'},{hanja:'伊',meaning:'저 이',strokes:6,ohaeng:'화(火)'},{hanja:'怡',meaning:'기쁠 이',strokes:9,ohaeng:'화(火)'},{hanja:'珥',meaning:'귀고리 이',strokes:10,ohaeng:'금(金)'}]},{syllable:'서',options:[{hanja:'瑞',meaning:'상서로울 서',strokes:13,ohaeng:'금(金)'},{hanja:'曙',meaning:'새벽 서',strokes:17,ohaeng:'화(火)'},{hanja:'緖',meaning:'실마리 서',strokes:14,ohaeng:'금(金)'},{hanja:'棲',meaning:'깃들 서',strokes:12,ohaeng:'목(木)'}]}],
+      desc:'원격·이격 대길로 사회적 명성과 덕망을 두루 갖출 이름입니다. 금(金)·수(Water) 기운을 발음·수리오행에서 고루 보완하여 빛나는 여성으로 성장합니다.' },
+    { kor:s.lastName+'아린', totalScore:78,
+      scores:{baleumOhaeng:77,baleumEumyang:79,sagekSuri:76,suriOhaeng:80,suriEumyang:78,sajuComplement:79},
+      syllables:[{kor:'아',baleumOhaeng:'토(土)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'린',baleumOhaeng:'화(火)',eumyang:'음(陰)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:18,name:'발전격(發展格)',luck:'길',desc:'꾸준한 발전이 기대되는 격'},hyeong:{num:24,name:'입신격(立身格)',luck:'대길',desc:'자수성가하는 격'},i:{num:19,name:'장벽격(障壁格)',luck:'평',desc:'도전을 극복하며 성장하는 격'},jeong:{num:25,name:'안강격(安康格)',luck:'길',desc:'건강하고 편안한 삶을 누리는 격'}},
+      hanjaOptions:[{syllable:'아',options:[{hanja:'雅',meaning:'우아할 아',strokes:12,ohaeng:'금(金)'},{hanja:'娥',meaning:'예쁠 아',strokes:10,ohaeng:'토(土)'},{hanja:'芽',meaning:'싹 아',strokes:8,ohaeng:'목(木)'},{hanja:'兒',meaning:'아이 아',strokes:8,ohaeng:'화(火)'}]},{syllable:'린',options:[{hanja:'璘',meaning:'옥빛 린',strokes:16,ohaeng:'금(金)'},{hanja:'麟',meaning:'기린 린',strokes:23,ohaeng:'토(土)'},{hanja:'潾',meaning:'맑을 린',strokes:16,ohaeng:'수(Water)'},{hanja:'燐',meaning:'도깨비불 린',strokes:17,ohaeng:'화(火)'}]}],
+      desc:'형격 입신격 대길로 스스로 이름을 세울 이름입니다. 목(木)·수(Water) 기운을 이중 보완하여 생명력 넘치고 총명한 여성으로 자랄 이름입니다.' },
+    { kor:s.lastName+'소율', totalScore:75,
+      scores:{baleumOhaeng:74,baleumEumyang:76,sagekSuri:73,suriOhaeng:77,suriEumyang:75,sajuComplement:76},
+      syllables:[{kor:'소',baleumOhaeng:'금(金)',eumyang:'양(陽)',suriOhaeng:'목(木)',suriEumyang:'양(陽)'},{kor:'율',baleumOhaeng:'수(Water)',eumyang:'음(陰)',suriOhaeng:'수(Water)',suriEumyang:'음(陰)'}],
+      sagek:{won:{num:17,name:'건창격(健暢格)',luck:'길',desc:'건강하고 활기차게 목표를 이루는 격'},hyeong:{num:23,name:'공명격(功名格)',luck:'대길',desc:'이름을 크게 떨치는 격'},i:{num:20,name:'공허격(空虛格)',luck:'평',desc:'노력으로 성취하는 격'},jeong:{num:24,name:'입신격(立身格)',luck:'길',desc:'자수성가하는 격'}},
+      hanjaOptions:[{syllable:'소',options:[{hanja:'昭',meaning:'밝을 소',strokes:9,ohaeng:'화(火)'},{hanja:'素',meaning:'흴 소',strokes:10,ohaeng:'금(金)'},{hanja:'笑',meaning:'웃음 소',strokes:10,ohaeng:'목(木)'},{hanja:'蘇',meaning:'소생할 소',strokes:19,ohaeng:'목(木)'}]},{syllable:'율',options:[{hanja:'律',meaning:'법칙 율',strokes:9,ohaeng:'금(金)'},{hanja:'栗',meaning:'밤 율',strokes:10,ohaeng:'목(木)'},{hanja:'潏',meaning:'물솟을 율',strokes:15,ohaeng:'수(Water)'},{hanja:'聿',meaning:'붓 율',strokes:6,ohaeng:'목(木)'}]}],
+      desc:'형격 공명격 대길로 사회에서 이름을 떨칠 이름입니다. 금(金)·수(Water) 기운을 발음·수리오행에서 보완하여 맑고 단아한 여성으로 성장합니다.' }
+  ]; }
+
   function resetApp() {
     clearInterval(adTimer);
     document.getElementById('last-name').value  = '';
@@ -759,6 +1252,16 @@
     document.getElementById('birth-time').value = '';
     document.getElementById('gender').value     = '미정';
     document.getElementById('skip-label').textContent = '광고 시청 중...';
+    // 더보기 버튼·추가 영역 초기화
+    const moreBtn = document.getElementById('btn-more-names');
+    moreBtn.style.display = '';
+    moreBtn.disabled = false;
+    moreBtn.style.opacity = '1';
+    moreBtn.textContent = '🎁 광고 보고 이름 3개 더 받기';
+    document.getElementById('extra-name-area').style.display = 'none';
+    document.getElementById('extra-name-list').innerHTML = '';
+    adMode = 'first';
+    moreCount = 0;
     showScreen('screen-input');
   }
 </script>
